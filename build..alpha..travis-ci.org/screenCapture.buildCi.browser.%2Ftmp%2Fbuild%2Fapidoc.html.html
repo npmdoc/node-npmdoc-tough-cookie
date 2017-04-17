@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/salesforce/tough-cookie"
-
-    >tough-cookie (v2.3.2)</a>
+    <a href="https://github.com/salesforce/tough-cookie">tough-cookie (v2.3.2)</a>
 </h1>
 <h4>RFC6265 Cookies and Cookie Jar for node.js</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.tough-cookie">module tough-cookie</a><ol>
 
@@ -2101,9 +2094,9 @@
   options = options || {};
 
   Object.keys(options).forEach(function(prop) {
-    if (Cookie.prototype.hasOwnProperty(prop) &#x26;&#x26;
-        Cookie.prototype[prop] !== options[prop] &#x26;&#x26;
-        prop.substr(0,1) !== &#x27;_&#x27;)
+    if (Cookie.prototype.hasOwnProperty(prop) &amp;&amp;
+        Cookie.prototype[prop] !== options[prop] &amp;&amp;
+        prop.substr(0,1) !== '_')
     {
       this[prop] = options[prop];
     }
@@ -2112,7 +2105,7 @@
   this.creation = this.creation || new Date();
 
   // used to break creation ties in cookieCompare():
-  Object.defineProperty(this, &#x27;creationIndex&#x27;, {
+  Object.defineProperty(this, 'creationIndex', {
     configurable: false,
     enumerable: false, // important for assert.deepEqual checks
     writable: true,
@@ -2138,7 +2131,7 @@
    * (Concurs with S5.3 step 3)
    */
 </span>  if (this.maxAge != null) {
-    return this.maxAge&#x3c;=0 ? 0 : this.maxAge*1000;
+    return this.maxAge&lt;=0 ? 0 : this.maxAge*1000;
   }
 
   var expires = this.expires;
@@ -2204,12 +2197,12 @@
     <li>description and source-code<pre class="apidocCodePre">function cookieString() {
   var val = this.value;
   if (val == null) {
-    val = &#x27;&#x27;;
+    val = '';
   }
-  if (this.key === &#x27;&#x27;) {
+  if (this.key === '') {
     return val;
   }
-  return this.key+&#x27;=&#x27;+val;
+  return this.key+'='+val;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2248,7 +2241,7 @@
     <li>description and source-code<pre class="apidocCodePre">function expiryTime(now) {
   if (this.maxAge != null) {
     var relativeTo = now || this.creation || new Date();
-    var age = (this.maxAge &#x3c;= 0) ? -Infinity : this.maxAge*1000;
+    var age = (this.maxAge &lt;= 0) ? -Infinity : this.maxAge*1000;
     return relativeTo.getTime() + age;
   }
 
@@ -2271,11 +2264,11 @@
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function inspect() {
   var now = Date.now();
-  return &#x27;Cookie=&#x22;&#x27;+this.toString() +
-    &#x27;; hostOnly=&#x27;+(this.hostOnly != null ? this.hostOnly : &#x27;?&#x27;) +
-    &#x27;; aAge=&#x27;+(this.lastAccessed ? (now-this.lastAccessed.getTime())+&#x27;ms&#x27; : &#x27;?&#x27;) +
-    &#x27;; cAge=&#x27;+(this.creation ? (now-this.creation.getTime())+&#x27;ms&#x27; : &#x27;?&#x27;) +
-    &#x27;&#x22;&#x27;;
+  return 'Cookie="'+this.toString() +
+    '; hostOnly='+(this.hostOnly != null ? this.hostOnly : '?') +
+    '; aAge='+(this.lastAccessed ? (now-this.lastAccessed.getTime())+'ms' : '?') +
+    '; cAge='+(this.creation ? (now-this.creation.getTime())+'ms' : '?') +
+    '"';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2308,7 +2301,7 @@
   if (exp instanceof Date) {
     this.expires = exp;
   } else {
-    this.expires = parseDate(exp) || &#x22;Infinity&#x22;;
+    this.expires = parseDate(exp) || "Infinity";
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -2346,23 +2339,23 @@
   var obj = {};
 
   var props = Cookie.serializableProperties;
-  for (var i=0; i&#x3c;props.length; i++) {
+  for (var i=0; i&lt;props.length; i++) {
     var prop = props[i];
     if (this[prop] === Cookie.prototype[prop]) {
       continue; // leave as prototype default
     }
 
-    if (prop === &#x27;expires&#x27; ||
-        prop === &#x27;creation&#x27; ||
-        prop === &#x27;lastAccessed&#x27;)
+    if (prop === 'expires' ||
+        prop === 'creation' ||
+        prop === 'lastAccessed')
     {
       if (this[prop] === null) {
         obj[prop] = null;
       } else {
-        obj[prop] = this[prop] == &#x22;Infinity&#x22; ? // intentionally not ===
-          &#x22;Infinity&#x22; : this[prop].toISOString();
+        obj[prop] = this[prop] == "Infinity" ? // intentionally not ===
+          "Infinity" : this[prop].toISOString();
       }
-    } else if (prop === &#x27;maxAge&#x27;) {
+    } else if (prop === 'maxAge') {
       if (this[prop] !== null) {
         // again, intentionally not ===
         obj[prop] = (this[prop] == Infinity || this[prop] == -Infinity) ?
@@ -2394,32 +2387,32 @@
 
   if (this.expires != Infinity) {
     if (this.expires instanceof Date) {
-      str += &#x27;; Expires=&#x27;+formatDate(this.expires);
+      str += '; Expires='+formatDate(this.expires);
     } else {
-      str += &#x27;; Expires=&#x27;+this.expires;
+      str += '; Expires='+this.expires;
     }
   }
 
-  if (this.maxAge != null &#x26;&#x26; this.maxAge != Infinity) {
-    str += &#x27;; Max-Age=&#x27;+this.maxAge;
+  if (this.maxAge != null &amp;&amp; this.maxAge != Infinity) {
+    str += '; Max-Age='+this.maxAge;
   }
 
-  if (this.domain &#x26;&#x26; !this.hostOnly) {
-    str += &#x27;; Domain=&#x27;+this.domain;
+  if (this.domain &amp;&amp; !this.hostOnly) {
+    str += '; Domain='+this.domain;
   }
   if (this.path) {
-    str += &#x27;; Path=&#x27;+this.path;
+    str += '; Path='+this.path;
   }
 
   if (this.secure) {
-    str += &#x27;; Secure&#x27;;
+    str += '; Secure';
   }
   if (this.httpOnly) {
-    str += &#x27;; HttpOnly&#x27;;
+    str += '; HttpOnly';
   }
   if (this.extensions) {
     this.extensions.forEach(function(ext) {
-      str += &#x27;; &#x27;+ext;
+      str += '; '+ext;
     });
   }
 
@@ -2441,13 +2434,13 @@
   if (!COOKIE_OCTETS.test(this.value)) {
     return false;
   }
-  if (this.expires != Infinity &#x26;&#x26; !(this.expires instanceof Date) &#x26;&#x26; !parseDate(this.expires)) {
+  if (this.expires != Infinity &amp;&amp; !(this.expires instanceof Date) &amp;&amp; !parseDate(this.expires)) {
     return false;
   }
-  if (this.maxAge != null &#x26;&#x26; this.maxAge &#x3c;= 0) {
-    return false; // &#x22;Max-Age=&#x22; non-zero-digit *DIGIT
+  if (this.maxAge != null &amp;&amp; this.maxAge &lt;= 0) {
+    return false; // "Max-Age=" non-zero-digit *DIGIT
   }
-  if (this.path != null &#x26;&#x26; !PATH_VALUE.test(this.path)) {
+  if (this.path != null &amp;&amp; !PATH_VALUE.test(this.path)) {
     return false;
   }
 
@@ -2457,7 +2450,7 @@
       return false; // S4.1.2.3 suggests that this is bad. domainMatch() tests confirm this
     }
     var suffix = pubsuffix.getPublicSuffix(cdomain);
-    if (suffix == null) { // it&#x27;s a public suffix
+    if (suffix == null) { // it's a public suffix
       return false;
     }
   }
@@ -2476,7 +2469,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function CookieJar(store, options) {
-  if (typeof options === &#x22;boolean&#x22;) {
+  if (typeof options === "boolean") {
     options = {rejectPublicSuffixes: options};
   } else if (options == null) {
     options = {};
@@ -2495,17 +2488,17 @@
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ``` javascript
-var tough = require(&#x27;tough-cookie&#x27;);
+var tough = require('tough-cookie');
 var Cookie = tough.Cookie;
 var cookie = Cookie.parse(header);
-cookie.value = &#x27;somethingdifferent&#x27;;
+cookie.value = 'somethingdifferent';
 header = cookie.toString();
 
 var cookiejar = new tough.<span class="apidocCodeKeywordSpan">CookieJar</span>();
-cookiejar.setCookie(cookie, &#x27;http://currentdomain.example.com/path&#x27;, cb);
+cookiejar.setCookie(cookie, 'http://currentdomain.example.com/path', cb);
 // ...
-cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cookies) {
-  res.headers[&#x27;cookie&#x27;] = cookies.join(&#x27;; &#x27;);
+cookiejar.getCookies('http://example.com/otherpath',function(err,cookies) {
+  res.headers['cookie'] = cookies.join('; ');
 });
 ```
 ...</pre></li>
@@ -2528,7 +2521,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   }
 
   var serialized;
-  if (typeof strOrObj === &#x27;string&#x27;) {
+  if (typeof strOrObj === 'string') {
     serialized = jsonParse(strOrObj);
     if (serialized instanceof Error) {
       return cb(serialized);
@@ -2558,13 +2551,13 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">CookieJar.deserializeSync = function (strOrObj, store) {
-  var serialized = typeof strOrObj === &#x27;string&#x27; ?
+  var serialized = typeof strOrObj === 'string' ?
     JSON.parse(strOrObj) : strOrObj;
   var jar = new CookieJar(store, serialized.rejectPublicSuffixes);
 
   // catch this mistake early:
   if (!jar.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   jar._importCookiesSync(serialized);
@@ -2586,7 +2579,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   var jar = this;
   var cookies = serialized.cookies;
   if (!cookies || !Array.isArray(cookies)) {
-    return cb(new Error(&#x27;serialized jar has no cookies array&#x27;));
+    return cb(new Error('serialized jar has no cookies array'));
   }
 
   function putNext(err) {
@@ -2628,7 +2621,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     <ul>
     <li>description and source-code<pre class="apidocCodePre">CookieJar.prototype._importCookiesSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -2683,7 +2676,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     <ul>
     <li>description and source-code<pre class="apidocCodePre">CookieJar.prototype.cloneSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -2723,7 +2716,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
         .map(function(c){
           return c.cookieString();
         })
-        .join(&#x27;; &#x27;));
+        .join('; '));
     }
   };
   args.push(next);
@@ -2743,7 +2736,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     <ul>
     <li>description and source-code<pre class="apidocCodePre">CookieJar.prototype.getCookieStringSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -2779,11 +2772,11 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   }
 
   var host = canonicalDomain(context.hostname);
-  var path = context.pathname || &#x27;/&#x27;;
+  var path = context.pathname || '/';
 
   var secure = options.secure;
-  if (secure == null &#x26;&#x26; context.protocol &#x26;&#x26;
-      (context.protocol == &#x27;https:&#x27; || context.protocol == &#x27;wss:&#x27;))
+  if (secure == null &amp;&amp; context.protocol &amp;&amp;
+      (context.protocol == 'https:' || context.protocol == 'wss:'))
   {
     secure = true;
   }
@@ -2799,12 +2792,12 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   var store = this.store;
 
   function matchingCookie(c) {
-    // &#x22;Either:
-    //   The cookie&#x27;s host-only-flag is true and the canonicalized
-    //   request-host is identical to the cookie&#x27;s domain.
+    // "Either:
+    //   The cookie's host-only-flag is true and the canonicalized
+    //   request-host is identical to the cookie's domain.
     // Or:
-    //   The cookie&#x27;s host-only-flag is false and the canonicalized
-    //   request-host domain-matches the cookie&#x27;s domain.&#x22;
+    //   The cookie's host-only-flag is false and the canonicalized
+    //   request-host domain-matches the cookie's domain."
     if (c.hostOnly) {
       if (c.domain != host) {
         return false;
@@ -2815,26 +2808,26 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
       }
     }
 
-    // &#x22;The request-uri&#x27;s path path-matches the cookie&#x27;s path.&#x22;
-    if (!allPaths &#x26;&#x26; !pathMatch(path, c.path)) {
+    // "The request-uri's path path-matches the cookie's path."
+    if (!allPaths &amp;&amp; !pathMatch(path, c.path)) {
       return false;
     }
 
-    // &#x22;If the cookie&#x27;s secure-only-flag is true, then the request-uri&#x27;s
-    // scheme must denote a &#x22;secure&#x22; protocol&#x22;
-    if (c.secure &#x26;&#x26; !secure) {
+    // "If the cookie's secure-only-flag is true, then the request-uri's
+    // scheme must denote a "secure" protocol"
+    if (c.secure &amp;&amp; !secure) {
       return false;
     }
 
-    // &#x22;If the cookie&#x27;s http-only-flag is true, then exclude the cookie if the
-    // cookie-string is being generated for a &#x22;non-HTTP&#x22; API&#x22;
-    if (c.httpOnly &#x26;&#x26; !http) {
+    // "If the cookie's http-only-flag is true, then exclude the cookie if the
+    // cookie-string is being generated for a "non-HTTP" API"
+    if (c.httpOnly &amp;&amp; !http) {
       return false;
     }
 
     // deferred from S5.3
     // non-RFC: allow retention of expired cookies by choice
-    if (expireCheck &#x26;&#x26; c.expiryTime() &#x3c;= now) {
+    if (expireCheck &amp;&amp; c.expiryTime() &lt;= now) {
       store.removeCookie(c.domain, c.path, c.key, function(){}); // result ignored
       return false;
     }
@@ -2878,7 +2871,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     <ul>
     <li>description and source-code<pre class="apidocCodePre">CookieJar.prototype.getCookiesSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -2935,7 +2928,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     <ul>
     <li>description and source-code<pre class="apidocCodePre">CookieJar.prototype.getSetCookieStringsSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -2965,16 +2958,16 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     <ul>
     <li>description and source-code<pre class="apidocCodePre">CookieJar.prototype.serialize = function (cb) {
   var type = this.store.constructor.name;
-  if (type === &#x27;Object&#x27;) {
+  if (type === 'Object') {
     type = null;
   }
 
-  // update README.md &#x22;Serialization Format&#x22; if you change this, please!
+  // update README.md "Serialization Format" if you change this, please!
   var serialized = {
     // The version of tough-cookie that serialized this jar. Generally a good
     // practice since future versions can make data import decisions based on
     // known past behavior. When/if this matters, use `semver`.
-    version: &#x27;tough-cookie@&#x27;+VERSION,
+    version: 'tough-cookie@'+VERSION,
 
     // add the store type, to make humans happy:
     storeType: type,
@@ -2986,10 +2979,10 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     cookies: []
   };
 
-  if (!(this.store.getAllCookies &#x26;&#x26;
-        typeof this.store.getAllCookies === &#x27;function&#x27;))
+  if (!(this.store.getAllCookies &amp;&amp;
+        typeof this.store.getAllCookies === 'function'))
   {
-    return cb(new Error(&#x27;store does not support getAllCookies and cannot be serialized&#x27;));
+    return cb(new Error('store does not support getAllCookies and cannot be serialized'));
   }
 
   this.store.getAllCookies(function(err,cookies) {
@@ -2998,7 +2991,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     }
 
     serialized.cookies = cookies.map(function(cookie) {
-      // convert to serialized &#x27;raw&#x27; cookies
+      // convert to serialized 'raw' cookies
       cookie = (cookie instanceof Cookie) ? cookie.toJSON() : cookie;
 
       // Remove the index so new ones get assigned during deserialization
@@ -3024,7 +3017,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     <ul>
     <li>description and source-code<pre class="apidocCodePre">CookieJar.prototype.serializeSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -3071,7 +3064,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     cookie = Cookie.parse(cookie, { loose: loose });
   }
   if (!cookie) {
-    err = new Error(&#x22;Cookie failed to parse&#x22;);
+    err = new Error("Cookie failed to parse");
     return cb(options.ignoreError ? null : err);
   }
 
@@ -3083,10 +3076,10 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   // S5.3 step 4: NOOP; domain is null by default
 
   // S5.3 step 5: public suffixes
-  if (this.rejectPublicSuffixes &#x26;&#x26; cookie.domain) {
+  if (this.rejectPublicSuffixes &amp;&amp; cookie.domain) {
     var suffix = pubsuffix.getPublicSuffix(cookie.cdomain());
-    if (suffix == null) { // e.g. &#x22;com&#x22;
-      err = new Error(&#x22;Cookie has domain set to a public suffix&#x22;);
+    if (suffix == null) { // e.g. "com"
+      err = new Error("Cookie has domain set to a public suffix");
       return cb(options.ignoreError ? null : err);
     }
   }
@@ -3094,11 +3087,11 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   // S5.3 step 6:
   if (cookie.domain) {
     if (!domainMatch(host, cookie.cdomain(), false)) {
-      err = new Error(&#x22;Cookie not in this host&#x27;s domain. Cookie:&#x22;+cookie.cdomain()+&#x22; Request:&#x22;+host);
+      err = new Error("Cookie not in this host's domain. Cookie:"+cookie.cdomain()+" Request:"+host);
       return cb(options.ignoreError ? null : err);
     }
 
-    if (cookie.hostOnly == null) { // don&#x27;t reset if already set
+    if (cookie.hostOnly == null) { // don't reset if already set
       cookie.hostOnly = false;
     }
 
@@ -3108,9 +3101,9 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   }
 
   //S5.2.4 If the attribute-value is empty or if the first character of the
-  //attribute-value is not %x2F (&#x22;/&#x22;):
+  //attribute-value is not %x2F ("/"):
   //Let cookie-path be the default-path.
-  if (!cookie.path || cookie.path[0] !== &#x27;/&#x27;) {
+  if (!cookie.path || cookie.path[0] !== '/') {
     cookie.path = defaultPath(context.pathname);
     cookie.pathIsDefault = true;
   }
@@ -3119,8 +3112,8 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   // S5.3 step 9: NOOP; httpOnly attribute
 
   // S5.3 step 10
-  if (options.http === false &#x26;&#x26; cookie.httpOnly) {
-    err = new Error(&#x22;Cookie is HttpOnly and this isn&#x27;t an HTTP API&#x22;);
+  if (options.http === false &amp;&amp; cookie.httpOnly) {
+    err = new Error("Cookie is HttpOnly and this isn't an HTTP API");
     return cb(options.ignoreError ? null : err);
   }
 
@@ -3146,10 +3139,10 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     };
 
     if (oldCookie) {
-      // S5.3 step 11 - &#x22;If the cookie store contains a cookie with the same name,
-      // domain, and path as the newly created cookie:&#x22;
-      if (options.http === false &#x26;&#x26; oldCookie.httpOnly) { // step 11.2
-        err = new Error(&#x22;old Cookie is HttpOnly and this isn&#x27;t an HTTP API&#x22;);
+      // S5.3 step 11 - "If the cookie store contains a cookie with the same name,
+      // domain, and path as the newly created cookie:"
+      if (options.http === false &amp;&amp; oldCookie.httpOnly) { // step 11.2
+        err = new Error("old Cookie is HttpOnly and this isn't an HTTP API");
         return cb(options.ignoreError ? null : err);
       }
       cookie.creation = oldCookie.creation; // step 11.3
@@ -3180,7 +3173,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     <ul>
     <li>description and source-code<pre class="apidocCodePre">CookieJar.prototype.setCookieSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -3268,7 +3261,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
 
   var pathMatcher;
   if (!path) {
-    // null means &#x22;all paths&#x22;
+    // null means "all paths"
     pathMatcher = function matchAll(domainIndex) {
       for (var curPath in domainIndex) {
         var pathIndex = domainIndex[curPath];
@@ -3357,7 +3350,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">MemoryCookieStore.prototype.inspect = function () {
-  return &#x22;{ idx: &#x22;+util.inspect(this.idx, false, 2)+&#x27; }&#x27;;
+  return "{ idx: "+util.inspect(this.idx, false, 2)+' }';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3394,7 +3387,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">MemoryCookieStore.prototype.removeCookie = function (domain, path, key, cb) {
-  if (this.idx[domain] &#x26;&#x26; this.idx[domain][path] &#x26;&#x26; this.idx[domain][path][key]) {
+  if (this.idx[domain] &amp;&amp; this.idx[domain][path] &amp;&amp; this.idx[domain][path][key]) {
     delete this.idx[domain][path][key];
   }
   cb(null);
@@ -3466,7 +3459,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Store.prototype.findCookie = function (domain, path, key, cb) {
-  throw new Error(&#x27;findCookie is not implemented&#x27;);
+  throw new Error('findCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3481,7 +3474,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Store.prototype.findCookies = function (domain, path, cb) {
-  throw new Error(&#x27;findCookies is not implemented&#x27;);
+  throw new Error('findCookies is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3496,7 +3489,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Store.prototype.getAllCookies = function (cb) {
-  throw new Error(&#x27;getAllCookies is not implemented (therefore jar cannot be serialized)&#x27;);
+  throw new Error('getAllCookies is not implemented (therefore jar cannot be serialized)');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3511,7 +3504,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Store.prototype.putCookie = function (cookie, cb) {
-  throw new Error(&#x27;putCookie is not implemented&#x27;);
+  throw new Error('putCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3526,7 +3519,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Store.prototype.removeCookie = function (domain, path, key, cb) {
-  throw new Error(&#x27;removeCookie is not implemented&#x27;);
+  throw new Error('removeCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3541,7 +3534,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Store.prototype.removeCookies = function (domain, path, cb) {
-  throw new Error(&#x27;removeCookies is not implemented&#x27;);
+  throw new Error('removeCookies is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3558,7 +3551,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     <li>description and source-code<pre class="apidocCodePre">Store.prototype.updateCookie = function (oldCookie, newCookie, cb) {
   // recommended default implementation:
   // return this.putCookie(newCookie, cb);
-  throw new Error(&#x27;updateCookie is not implemented&#x27;);
+  throw new Error('updateCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3576,10 +3569,10 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   if (str == null) {
     return null;
   }
-  str = str.trim().replace(/^\./,&#x27;&#x27;); // S4.1.2.3 &#x26; S5.2.3: ignore leading .
+  str = str.trim().replace(/^\./,''); // S4.1.2.3 &amp; S5.2.3: ignore leading .
 
   // convert to IDN if any non-ASCII characters
-  if (punycode &#x26;&#x26; /[^\u0001-\u007f]/.test(str)) {
+  if (punycode &amp;&amp; /[^\u0001-\u007f]/.test(str)) {
     str = punycode.toASCII(str);
   }
 
@@ -3616,7 +3609,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     return cmp;
   }
 
-  // break ties for the same millisecond (precision of JavaScript&#x27;s clock)
+  // break ties for the same millisecond (precision of JavaScript's clock)
   cmp = a.creationIndex - b.creationIndex;
 
   return cmp;
@@ -3634,25 +3627,25 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function defaultPath(path) {
-  // &#x22;2. If the uri-path is empty or if the first character of the uri-path is not
-  // a %x2F (&#x22;/&#x22;) character, output %x2F (&#x22;/&#x22;) and skip the remaining steps.
-  if (!path || path.substr(0,1) !== &#x22;/&#x22;) {
-    return &#x22;/&#x22;;
+  // "2. If the uri-path is empty or if the first character of the uri-path is not
+  // a %x2F ("/") character, output %x2F ("/") and skip the remaining steps.
+  if (!path || path.substr(0,1) !== "/") {
+    return "/";
   }
 
-  // &#x22;3. If the uri-path contains no more than one %x2F (&#x22;/&#x22;) character, output
-  // %x2F (&#x22;/&#x22;) and skip the remaining step.&#x22;
-  if (path === &#x22;/&#x22;) {
+  // "3. If the uri-path contains no more than one %x2F ("/") character, output
+  // %x2F ("/") and skip the remaining step."
+  if (path === "/") {
     return path;
   }
 
-  var rightSlash = path.lastIndexOf(&#x22;/&#x22;);
+  var rightSlash = path.lastIndexOf("/");
   if (rightSlash === 0) {
-    return &#x22;/&#x22;;
+    return "/";
   }
 
-  // &#x22;4. Output the characters of the uri-path from the first character up to,
-  // but not including, the right-most %x2F (&#x22;/&#x22;).&#x22;
+  // "4. Output the characters of the uri-path from the first character up to,
+  // but not including, the right-most %x2F ("/")."
   return path.slice(0, rightSlash);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -3677,36 +3670,36 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   }
 
 <span class="apidocCodeCommentSpan">  /*
-   * &#x22;The domain string and the string are identical. (Note that both the
+   * "The domain string and the string are identical. (Note that both the
    * domain string and the string will have been canonicalized to lower case at
-   * this point)&#x22;
+   * this point)"
    */
 </span>  if (str == domStr) {
     return true;
   }
 
-  /* &#x22;All of the following [three] conditions hold:&#x22; (order adjusted from the RFC) */
+  /* "All of the following [three] conditions hold:" (order adjusted from the RFC) */
 
-  /* &#x22;* The string is a host name (i.e., not an IP address).&#x22; */
+  /* "* The string is a host name (i.e., not an IP address)." */
   if (net.isIP(str)) {
     return false;
   }
 
-  /* &#x22;* The domain string is a suffix of the string&#x22; */
+  /* "* The domain string is a suffix of the string" */
   var idx = str.indexOf(domStr);
-  if (idx &#x3c;= 0) {
-    return false; // it&#x27;s a non-match (-1) or prefix (0)
+  if (idx &lt;= 0) {
+    return false; // it's a non-match (-1) or prefix (0)
   }
 
-  // e.g &#x22;a.b.c&#x22;.indexOf(&#x22;b.c&#x22;) === 2
+  // e.g "a.b.c".indexOf("b.c") === 2
   // 5 === 3+2
-  if (str.length !== domStr.length + idx) { // it&#x27;s not a suffix
+  if (str.length !== domStr.length + idx) { // it's not a suffix
     return false;
   }
 
-  /* &#x22;* The last character of the string that is not included in the domain
-  * string is a %x2E (&#x22;.&#x22;) character.&#x22; */
-  if (str.substr(idx-1,1) !== &#x27;.&#x27;) {
+  /* "* The last character of the string that is not included in the domain
+  * string is a %x2E (".") character." */
+  if (str.substr(idx-1,1) !== '.') {
     return false;
   }
 
@@ -3725,13 +3718,13 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function formatDate(date) {
-  var d = date.getUTCDate(); d = d &#x3e;= 10 ? d : &#x27;0&#x27;+d;
-  var h = date.getUTCHours(); h = h &#x3e;= 10 ? h : &#x27;0&#x27;+h;
-  var m = date.getUTCMinutes(); m = m &#x3e;= 10 ? m : &#x27;0&#x27;+m;
-  var s = date.getUTCSeconds(); s = s &#x3e;= 10 ? s : &#x27;0&#x27;+s;
-  return NUM_TO_DAY[date.getUTCDay()] + &#x27;, &#x27; +
-    d+&#x27; &#x27;+ NUM_TO_MONTH[date.getUTCMonth()] +&#x27; &#x27;+ date.getUTCFullYear() +&#x27; &#x27;+
-    h+&#x27;:&#x27;+m+&#x27;:&#x27;+s+&#x27; GMT&#x27;;
+  var d = date.getUTCDate(); d = d &gt;= 10 ? d : '0'+d;
+  var h = date.getUTCHours(); h = h &gt;= 10 ? h : '0'+h;
+  var m = date.getUTCMinutes(); m = m &gt;= 10 ? m : '0'+m;
+  var s = date.getUTCSeconds(); s = s &gt;= 10 ? s : '0'+s;
+  return NUM_TO_DAY[date.getUTCDay()] + ', ' +
+    d+' '+ NUM_TO_MONTH[date.getUTCMonth()] +' '+ date.getUTCFullYear() +' '+
+    h+':'+m+':'+s+' GMT';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3751,18 +3744,18 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   }
 
   var obj;
-  if (typeof str === &#x27;string&#x27;) {
+  if (typeof str === 'string') {
     obj = jsonParse(str);
     if (obj instanceof Error) {
       return null;
     }
   } else {
-    // assume it&#x27;s an Object
+    // assume it's an Object
     obj = str;
   }
 
   var c = new Cookie();
-  for (var i=0; i&#x3c;Cookie.serializableProperties.length; i++) {
+  for (var i=0; i&lt;Cookie.serializableProperties.length; i++) {
     var prop = Cookie.serializableProperties[i];
     if (obj[prop] === undefined ||
         obj[prop] === Cookie.prototype[prop])
@@ -3770,15 +3763,15 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
       continue; // leave as prototype default
     }
 
-    if (prop === &#x27;expires&#x27; ||
-        prop === &#x27;creation&#x27; ||
-        prop === &#x27;lastAccessed&#x27;)
+    if (prop === 'expires' ||
+        prop === 'creation' ||
+        prop === 'lastAccessed')
     {
       if (obj[prop] === null) {
         c[prop] = null;
       } else {
-        c[prop] = obj[prop] == &#x22;Infinity&#x22; ?
-          &#x22;Infinity&#x22; : new Date(obj[prop]);
+        c[prop] = obj[prop] == "Infinity" ?
+          "Infinity" : new Date(obj[prop]);
       }
     } else {
       c[prop] = obj[prop];
@@ -3834,7 +3827,7 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
    * be used to endorse or promote products derived from this software without
    * specific prior written permission.
    *
-   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &#x22;AS IS&#x22;
+   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
    * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
    * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
    * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
@@ -3863,13 +3856,13 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
   }
 
   domain = domain.toLowerCase();
-  var parts = domain.split(&#x27;.&#x27;).reverse();
+  var parts = domain.split('.').reverse();
 
-  var suffix = &#x27;&#x27;;
+  var suffix = '';
   var suffixLen = 0;
-  for (var i=0; i&#x3c;parts.length; i++) {
+  for (var i=0; i&lt;parts.length; i++) {
     var part = parts[i];
-    var starstr = &#x27;*&#x27;+suffix;
+    var starstr = '*'+suffix;
     var partstr = part+suffix;
 
     if (index[starstr]) { // star rule matches
@@ -3881,16 +3874,16 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
       suffixLen = i+1;
     }
 
-    suffix = &#x27;.&#x27;+partstr;
+    suffix = '.'+partstr;
   }
 
-  if (index[&#x27;*&#x27;+suffix]) { // *.domain exists (e.g. *.kyoto.jp for domain=&#x27;kyoto.jp&#x27;);
+  if (index['*'+suffix]) { // *.domain exists (e.g. *.kyoto.jp for domain='kyoto.jp');
     return null;
   }
 
   suffixLen = suffixLen || 1;
-  if (parts.length &#x3e; suffixLen) {
-    var publicSuffix = parts.slice(0,suffixLen+1).reverse().join(&#x27;.&#x27;);
+  if (parts.length &gt; suffixLen) {
+    var publicSuffix = parts.slice(0,suffixLen+1).reverse().join('.');
     return converted ? punycode.toUnicode(publicSuffix) : publicSuffix;
   }
 
@@ -3898,8 +3891,8 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
  */
-&#x22;use strict&#x22;;
-var pubsuffix = require(&#x27;./pubsuffix&#x27;);
+"use strict";
+var pubsuffix = require('./pubsuffix');
 
 // Gives the permutation of all possible domainMatch()es of a given domain. The
 // array is in shortest-to-longest order.  Handy for indexing.
@@ -3924,17 +3917,17 @@ if (pubSuf == domain) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function parse(str, options) {
-  if (!options || typeof options !== &#x27;object&#x27;) {
+  if (!options || typeof options !== 'object') {
     options = {};
   }
   str = str.trim();
 
-  // We use a regex to parse the &#x22;name-value-pair&#x22; part of S5.2
-  var firstSemi = str.indexOf(&#x27;;&#x27;); // S5.2 step 1
+  // We use a regex to parse the "name-value-pair" part of S5.2
+  var firstSemi = str.indexOf(';'); // S5.2 step 1
   var pairRe = options.loose ? LOOSE_COOKIE_PAIR : COOKIE_PAIR;
   var result = pairRe.exec(firstSemi === -1 ? str : str.substr(0,firstSemi));
 
-  // Rx satisfies the &#x22;the name string is empty&#x22; and &#x22;lacks a %x3D (&#x22;=&#x22;)&#x22;
+  // Rx satisfies the "the name string is empty" and "lacks a %x3D ("=")"
   // constraints as well as trimming any whitespace.
   if (!result) {
     return;
@@ -3944,7 +3937,7 @@ if (pubSuf == domain) {
   if (result[1]) {
     c.key = result[2].trim();
   } else {
-    c.key = &#x27;&#x27;;
+    c.key = '';
   }
   c.value = result[3].trim();
   if (CONTROL_CHARS.test(c.key) || CONTROL_CHARS.test(c.value)) {
@@ -3955,32 +3948,32 @@ if (pubSuf == domain) {
     return c;
   }
 
-  // S5.2.3 &#x22;unparsed-attributes consist of the remainder of the set-cookie-string
-  // (including the %x3B (&#x22;;&#x22;) in question).&#x22; plus later on in the same section
-  // &#x22;discard the first &#x22;;&#x22; and trim&#x22;.
+  // S5.2.3 "unparsed-attributes consist of the remainder of the set-cookie-string
+  // (including the %x3B (";") in question)." plus later on in the same section
+  // "discard the first ";" and trim".
   var unparsed = str.slice(firstSemi + 1).trim();
 
-  // &#x22;If the unparsed-attributes string is empty, skip the rest of these
-  // steps.&#x22;
+  // "If the unparsed-attributes string is empty, skip the rest of these
+  // steps."
   if (unparsed.length === 0) {
     return c;
   }
 
 <span class="apidocCodeCommentSpan">  /*
-   * S5.2 says that when looping over the items &#x22;[p]rocess the attribute-name
+   * S5.2 says that when looping over the items "[p]rocess the attribute-name
    * and attribute-value according to the requirements in the following
-   * subsections&#x22; for every item.  Plus, for many of the individual attributes
-   * in S5.3 it says to use the &#x22;attribute-value of the last attribute in the
-   * cookie-attribute-list&#x22;.  Therefore, in this implementation, we overwrite
+   * subsections" for every item.  Plus, for many of the individual attributes
+   * in S5.3 it says to use the "attribute-value of the last attribute in the
+   * cookie-attribute-list".  Therefore, in this implementation, we overwrite
    * the previous value.
    */
-</span>  var cookie_avs = unparsed.split(&#x27;;&#x27;);
+</span>  var cookie_avs = unparsed.split(';');
   while (cookie_avs.length) {
     var av = cookie_avs.shift().trim();
-    if (av.length === 0) { // happens if &#x22;;;&#x22; appears
+    if (av.length === 0) { // happens if ";;" appears
       continue;
     }
-    var av_sep = av.indexOf(&#x27;=&#x27;);
+    var av_sep = av.indexOf('=');
     var av_key, av_value;
 
     if (av_sep === -1) {
@@ -3998,59 +3991,59 @@ if (pubSuf == domain) {
     }
 
     switch(av_key) {
-    case &#x27;expires&#x27;: // S5.2.1
+    case 'expires': // S5.2.1
       if (av_value) {
         var exp = parseDate(av_value);
-        // &#x22;If the attribute-value failed to parse as a cookie date, ignore the
-        // cookie-av.&#x22;
+        // "If the attribute-value failed to parse as a cookie date, ignore the
+        // cookie-av."
         if (exp) {
-          // over and underflow not realistically a concern: V8&#x27;s getTime() seems to
+          // over and underflow not realistically a concern: V8's getTime() seems to
           // store something larger than a 32-bit time_t (even with 32-bit node)
           c.expires = exp;
         }
       }
       break;
 
-    case &#x27;max-age&#x27;: // S5.2.2
+    case 'max-age': // S5.2.2
       if (av_value) {
-        // &#x22;If the first character of the attribute-value is not a DIGIT or a &#x22;-&#x22;
+        // "If the first character of the attribute-value is not a DIGIT or a "-"
         // character ...[or]... If the remainder of attribute-value contains a
-        // non-DIGIT character, ignore the cookie-av.&#x22;
+        // non-DIGIT character, ignore the cookie-av."
         if (/^-?[0-9]+$/.test(av_value)) {
           var delta = parseInt(av_value, 10);
-          // &#x22;If delta-seconds is less than or equal to zero (0), let expiry-time
-          // be the earliest representable date and time.&#x22;
+          // "If delta-seconds is less than or equal to zero (0), let expiry-time
+          // be the earliest representable date and time."
           c.setMaxAge(delta);
         }
       }
       break;
 
-    case &#x27;domain&#x27;: // S5.2.3
-      // &#x22;If the attribute-value is empty, the behavior is undefined.  However,
-      // the user agent SHOULD ignore the cookie-av entirely.&#x22;
+    case 'domain': // S5.2.3
+      // "If the attribute-value is empty, the behavior is undefined.  However,
+      // the user agent SHOULD ignore the cookie-av entirely."
       if (av_value) {
-        // S5.2.3 &#x22;Let cookie-domain be the attribute-value without the leading %x2E
-        // (&#x22;.&#x22;) character.&#x22;
-        var domain = av_value.trim().replace(/^\./, &#x27;&#x27;);
+        // S5.2.3 "Let cookie-domain be the attribute-value without the leading %x2E
+        // (".") character."
+        var domain = av_value.trim().replace(/^\./, '');
         if (domain) {
-          // &#x22;Convert the cookie-domain to lower case.&#x22;
+          // "Convert the cookie-domain to lower case."
           c.domain = domain.toLowerCase();
         }
       }
       break;
 
-    case &#x27;path&#x27;: // S5.2.4
+    case 'path': // S5.2.4
       /*
-       * &#x22;If the attribute-value is empty or if the first character of the
-       * attribute-value is not %x2F (&#x22;/&#x22;):
+       * "If the attribute-value is empty or if the first character of the
+       * attribute-value is not %x2F ("/"):
        *   Let cookie-path be the default-path.
        * Otherwise:
-       *   Let cookie-path be the attribute-value.&#x22;
+       *   Let cookie-path be the attribute-value."
        *
-       * We&#x27;ll represent the default-path as null since it depends on the
+       * We'll represent the default-path as null since it depends on the
        * context of the parsing.
        */
-      c.path = av_value &#x26;&#x26; av_va ...</pre></li>
+      c.path = av_value &amp;&amp; av_va ...</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 [![Build Status](https://travis-ci.org/salesforce/tough-cookie.png?branch=master)](https://travis-ci.org/salesforce/tough-cookie
 )
@@ -4058,16 +4051,16 @@ if (pubSuf == domain) {
 # Synopsis
 
 ``` javascript
-var tough = require(&#x27;tough-cookie&#x27;);
+var tough = require('tough-cookie');
 var Cookie = tough.Cookie;
 var cookie = Cookie.<span class="apidocCodeKeywordSpan">parse</span>(header);
-cookie.value = &#x27;somethingdifferent&#x27;;
+cookie.value = 'somethingdifferent';
 header = cookie.toString();
 
 var cookiejar = new tough.CookieJar();
-cookiejar.setCookie(cookie, &#x27;http://currentdomain.example.com/path&#x27;, cb);
+cookiejar.setCookie(cookie, 'http://currentdomain.example.com/path', cb);
 // ...
-cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cookies) {
+cookiejar.getCookies('http://example.com/otherpath',function(err,cookies) {
 ...</pre></li>
     </ul>
 
@@ -4101,7 +4094,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   var month = null;
   var year = null;
 
-  for (var i=0; i&#x3c;tokens.length; i++) {
+  for (var i=0; i&lt;tokens.length; i++) {
     var token = tokens[i].trim();
     if (!token.length) {
       continue;
@@ -4127,7 +4120,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
          * *  the minute-value is greater than 59, or
          * *  the second-value is greater than 59.
          */
-        if(hour &#x3e; 23 || minutes &#x3e; 59 || seconds &#x3e; 59) {
+        if(hour &gt; 23 || minutes &gt; 59 || seconds &gt; 59) {
           return;
         }
 
@@ -4147,7 +4140,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
         /* RFC6265 S5.1.1.5:
          * [fail if] the day-of-month-value is less than 1 or greater than 31
          */
-        if(day &#x3c; 1 || day &#x3e; 31) {
+        if(day &lt; 1 || day &gt; 31) {
           return;
         }
         continue;
@@ -4182,13 +4175,13 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
          * 4.  If the year-value is greater than or equal to 0 and less
          * than or equal to 69, increment the year-value by 2000.
          */
-        if (70 &#x3c;= year &#x26;&#x26; year &#x3c;= 99) {
+        if (70 &lt;= year &amp;&amp; year &lt;= 99) {
           year += 1900;
-        } else if (0 &#x3c;= year &#x26;&#x26; year &#x3c;= 69) {
+        } else if (0 &lt;= year &amp;&amp; year &lt;= 69) {
           year += 2000;
         }
 
-        if (year &#x3c; 1601) {
+        if (year &lt; 1601) {
           return; // 5. ... the year-value is less than 1601
         }
       }
@@ -4215,23 +4208,23 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function pathMatch(reqPath, cookiePath) {
-  // &#x22;o  The cookie-path and the request-path are identical.&#x22;
+  // "o  The cookie-path and the request-path are identical."
   if (cookiePath === reqPath) {
     return true;
   }
 
   var idx = reqPath.indexOf(cookiePath);
   if (idx === 0) {
-    // &#x22;o  The cookie-path is a prefix of the request-path, and the last
-    // character of the cookie-path is %x2F (&#x22;/&#x22;).&#x22;
-    if (cookiePath.substr(-1) === &#x22;/&#x22;) {
+    // "o  The cookie-path is a prefix of the request-path, and the last
+    // character of the cookie-path is %x2F ("/")."
+    if (cookiePath.substr(-1) === "/") {
       return true;
     }
 
-    // &#x22; o  The cookie-path is a prefix of the request-path, and the first
+    // " o  The cookie-path is a prefix of the request-path, and the first
     // character of the request-path that is not included in the cookie- path
-    // is a %x2F (&#x22;/&#x22;) character.&#x22;
-    if (reqPath.substr(cookiePath.length, 1) === &#x22;/&#x22;) {
+    // is a %x2F ("/") character."
+    if (reqPath.substr(cookiePath.length, 1) === "/") {
       return true;
     }
   }
@@ -4259,12 +4252,12 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     return [domain];
   }
 
-  var prefix = domain.slice(0, -(pubSuf.length + 1)); // &#x22;.example.com&#x22;
-  var parts = prefix.split(&#x27;.&#x27;).reverse();
+  var prefix = domain.slice(0, -(pubSuf.length + 1)); // ".example.com"
+  var parts = prefix.split('.').reverse();
   var cur = pubSuf;
   var permutations = [cur];
   while (parts.length) {
-    cur = parts.shift() + &#x27;.&#x27; + cur;
+    cur = parts.shift() + '.' + cur;
     permutations.push(cur);
   }
   return permutations;
@@ -4282,22 +4275,22 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function permutePath(path) {
-  if (path === &#x27;/&#x27;) {
-    return [&#x27;/&#x27;];
+  if (path === '/') {
+    return ['/'];
   }
-  if (path.lastIndexOf(&#x27;/&#x27;) === path.length-1) {
+  if (path.lastIndexOf('/') === path.length-1) {
     path = path.substr(0,path.length-1);
   }
   var permutations = [path];
-  while (path.length &#x3e; 1) {
-    var lindex = path.lastIndexOf(&#x27;/&#x27;);
+  while (path.length &gt; 1) {
+    var lindex = path.lastIndexOf('/');
     if (lindex === 0) {
       break;
     }
     path = path.substr(0,lindex);
     permutations.push(path);
   }
-  permutations.push(&#x27;/&#x27;);
+  permutations.push('/');
   return permutations;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -4335,9 +4328,9 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   options = options || {};
 
   Object.keys(options).forEach(function(prop) {
-    if (Cookie.prototype.hasOwnProperty(prop) &#x26;&#x26;
-        Cookie.prototype[prop] !== options[prop] &#x26;&#x26;
-        prop.substr(0,1) !== &#x27;_&#x27;)
+    if (Cookie.prototype.hasOwnProperty(prop) &amp;&amp;
+        Cookie.prototype[prop] !== options[prop] &amp;&amp;
+        prop.substr(0,1) !== '_')
     {
       this[prop] = options[prop];
     }
@@ -4346,7 +4339,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   this.creation = this.creation || new Date();
 
   // used to break creation ties in cookieCompare():
-  Object.defineProperty(this, &#x27;creationIndex&#x27;, {
+  Object.defineProperty(this, 'creationIndex', {
     configurable: false,
     enumerable: false, // important for assert.deepEqual checks
     writable: true,
@@ -4371,18 +4364,18 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   }
 
   var obj;
-  if (typeof str === &#x27;string&#x27;) {
+  if (typeof str === 'string') {
     obj = jsonParse(str);
     if (obj instanceof Error) {
       return null;
     }
   } else {
-    // assume it&#x27;s an Object
+    // assume it's an Object
     obj = str;
   }
 
   var c = new Cookie();
-  for (var i=0; i&#x3c;Cookie.serializableProperties.length; i++) {
+  for (var i=0; i&lt;Cookie.serializableProperties.length; i++) {
     var prop = Cookie.serializableProperties[i];
     if (obj[prop] === undefined ||
         obj[prop] === Cookie.prototype[prop])
@@ -4390,15 +4383,15 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
       continue; // leave as prototype default
     }
 
-    if (prop === &#x27;expires&#x27; ||
-        prop === &#x27;creation&#x27; ||
-        prop === &#x27;lastAccessed&#x27;)
+    if (prop === 'expires' ||
+        prop === 'creation' ||
+        prop === 'lastAccessed')
     {
       if (obj[prop] === null) {
         c[prop] = null;
       } else {
-        c[prop] = obj[prop] == &#x22;Infinity&#x22; ?
-          &#x22;Infinity&#x22; : new Date(obj[prop]);
+        c[prop] = obj[prop] == "Infinity" ?
+          "Infinity" : new Date(obj[prop]);
       }
     } else {
       c[prop] = obj[prop];
@@ -4436,17 +4429,17 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function parse(str, options) {
-  if (!options || typeof options !== &#x27;object&#x27;) {
+  if (!options || typeof options !== 'object') {
     options = {};
   }
   str = str.trim();
 
-  // We use a regex to parse the &#x22;name-value-pair&#x22; part of S5.2
-  var firstSemi = str.indexOf(&#x27;;&#x27;); // S5.2 step 1
+  // We use a regex to parse the "name-value-pair" part of S5.2
+  var firstSemi = str.indexOf(';'); // S5.2 step 1
   var pairRe = options.loose ? LOOSE_COOKIE_PAIR : COOKIE_PAIR;
   var result = pairRe.exec(firstSemi === -1 ? str : str.substr(0,firstSemi));
 
-  // Rx satisfies the &#x22;the name string is empty&#x22; and &#x22;lacks a %x3D (&#x22;=&#x22;)&#x22;
+  // Rx satisfies the "the name string is empty" and "lacks a %x3D ("=")"
   // constraints as well as trimming any whitespace.
   if (!result) {
     return;
@@ -4456,7 +4449,7 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
   if (result[1]) {
     c.key = result[2].trim();
   } else {
-    c.key = &#x27;&#x27;;
+    c.key = '';
   }
   c.value = result[3].trim();
   if (CONTROL_CHARS.test(c.key) || CONTROL_CHARS.test(c.value)) {
@@ -4467,32 +4460,32 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
     return c;
   }
 
-  // S5.2.3 &#x22;unparsed-attributes consist of the remainder of the set-cookie-string
-  // (including the %x3B (&#x22;;&#x22;) in question).&#x22; plus later on in the same section
-  // &#x22;discard the first &#x22;;&#x22; and trim&#x22;.
+  // S5.2.3 "unparsed-attributes consist of the remainder of the set-cookie-string
+  // (including the %x3B (";") in question)." plus later on in the same section
+  // "discard the first ";" and trim".
   var unparsed = str.slice(firstSemi + 1).trim();
 
-  // &#x22;If the unparsed-attributes string is empty, skip the rest of these
-  // steps.&#x22;
+  // "If the unparsed-attributes string is empty, skip the rest of these
+  // steps."
   if (unparsed.length === 0) {
     return c;
   }
 
 <span class="apidocCodeCommentSpan">  /*
-   * S5.2 says that when looping over the items &#x22;[p]rocess the attribute-name
+   * S5.2 says that when looping over the items "[p]rocess the attribute-name
    * and attribute-value according to the requirements in the following
-   * subsections&#x22; for every item.  Plus, for many of the individual attributes
-   * in S5.3 it says to use the &#x22;attribute-value of the last attribute in the
-   * cookie-attribute-list&#x22;.  Therefore, in this implementation, we overwrite
+   * subsections" for every item.  Plus, for many of the individual attributes
+   * in S5.3 it says to use the "attribute-value of the last attribute in the
+   * cookie-attribute-list".  Therefore, in this implementation, we overwrite
    * the previous value.
    */
-</span>  var cookie_avs = unparsed.split(&#x27;;&#x27;);
+</span>  var cookie_avs = unparsed.split(';');
   while (cookie_avs.length) {
     var av = cookie_avs.shift().trim();
-    if (av.length === 0) { // happens if &#x22;;;&#x22; appears
+    if (av.length === 0) { // happens if ";;" appears
       continue;
     }
-    var av_sep = av.indexOf(&#x27;=&#x27;);
+    var av_sep = av.indexOf('=');
     var av_key, av_value;
 
     if (av_sep === -1) {
@@ -4510,59 +4503,59 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
     }
 
     switch(av_key) {
-    case &#x27;expires&#x27;: // S5.2.1
+    case 'expires': // S5.2.1
       if (av_value) {
         var exp = parseDate(av_value);
-        // &#x22;If the attribute-value failed to parse as a cookie date, ignore the
-        // cookie-av.&#x22;
+        // "If the attribute-value failed to parse as a cookie date, ignore the
+        // cookie-av."
         if (exp) {
-          // over and underflow not realistically a concern: V8&#x27;s getTime() seems to
+          // over and underflow not realistically a concern: V8's getTime() seems to
           // store something larger than a 32-bit time_t (even with 32-bit node)
           c.expires = exp;
         }
       }
       break;
 
-    case &#x27;max-age&#x27;: // S5.2.2
+    case 'max-age': // S5.2.2
       if (av_value) {
-        // &#x22;If the first character of the attribute-value is not a DIGIT or a &#x22;-&#x22;
+        // "If the first character of the attribute-value is not a DIGIT or a "-"
         // character ...[or]... If the remainder of attribute-value contains a
-        // non-DIGIT character, ignore the cookie-av.&#x22;
+        // non-DIGIT character, ignore the cookie-av."
         if (/^-?[0-9]+$/.test(av_value)) {
           var delta = parseInt(av_value, 10);
-          // &#x22;If delta-seconds is less than or equal to zero (0), let expiry-time
-          // be the earliest representable date and time.&#x22;
+          // "If delta-seconds is less than or equal to zero (0), let expiry-time
+          // be the earliest representable date and time."
           c.setMaxAge(delta);
         }
       }
       break;
 
-    case &#x27;domain&#x27;: // S5.2.3
-      // &#x22;If the attribute-value is empty, the behavior is undefined.  However,
-      // the user agent SHOULD ignore the cookie-av entirely.&#x22;
+    case 'domain': // S5.2.3
+      // "If the attribute-value is empty, the behavior is undefined.  However,
+      // the user agent SHOULD ignore the cookie-av entirely."
       if (av_value) {
-        // S5.2.3 &#x22;Let cookie-domain be the attribute-value without the leading %x2E
-        // (&#x22;.&#x22;) character.&#x22;
-        var domain = av_value.trim().replace(/^\./, &#x27;&#x27;);
+        // S5.2.3 "Let cookie-domain be the attribute-value without the leading %x2E
+        // (".") character."
+        var domain = av_value.trim().replace(/^\./, '');
         if (domain) {
-          // &#x22;Convert the cookie-domain to lower case.&#x22;
+          // "Convert the cookie-domain to lower case."
           c.domain = domain.toLowerCase();
         }
       }
       break;
 
-    case &#x27;path&#x27;: // S5.2.4
+    case 'path': // S5.2.4
       /*
-       * &#x22;If the attribute-value is empty or if the first character of the
-       * attribute-value is not %x2F (&#x22;/&#x22;):
+       * "If the attribute-value is empty or if the first character of the
+       * attribute-value is not %x2F ("/"):
        *   Let cookie-path be the default-path.
        * Otherwise:
-       *   Let cookie-path be the attribute-value.&#x22;
+       *   Let cookie-path be the attribute-value."
        *
-       * We&#x27;ll represent the default-path as null since it depends on the
+       * We'll represent the default-path as null since it depends on the
        * context of the parsing.
        */
-      c.path = av_value &#x26;&#x26; av_va ...</pre></li>
+      c.path = av_value &amp;&amp; av_va ...</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 [![Build Status](https://travis-ci.org/salesforce/tough-cookie.png?branch=master)](https://travis-ci.org/salesforce/tough-cookie
 )
@@ -4570,16 +4563,16 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
 # Synopsis
 
 ``` javascript
-var tough = require(&#x27;tough-cookie&#x27;);
+var tough = require('tough-cookie');
 var Cookie = tough.Cookie;
 var cookie = Cookie.<span class="apidocCodeKeywordSpan">parse</span>(header);
-cookie.value = &#x27;somethingdifferent&#x27;;
+cookie.value = 'somethingdifferent';
 header = cookie.toString();
 
 var cookiejar = new tough.CookieJar();
-cookiejar.setCookie(cookie, &#x27;http://currentdomain.example.com/path&#x27;, cb);
+cookiejar.setCookie(cookie, 'http://currentdomain.example.com/path', cb);
 // ...
-cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cookies) {
+cookiejar.getCookies('http://example.com/otherpath',function(err,cookies) {
 ...</pre></li>
     </ul>
 
@@ -4612,7 +4605,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
    * (Concurs with S5.3 step 3)
    */
 </span>  if (this.maxAge != null) {
-    return this.maxAge&#x3c;=0 ? 0 : this.maxAge*1000;
+    return this.maxAge&lt;=0 ? 0 : this.maxAge*1000;
   }
 
   var expires = this.expires;
@@ -4635,16 +4628,16 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
 Max-Age takes precedence over Expires (as per the RFC). The `.creation` attribute -- or, by default, the `now` paramter -- is used
  to offset the `.maxAge` attribute.
 
-If Expires (`.expires`) is set, that&#x27;s returned.
+If Expires (`.expires`) is set, that's returned.
 
-Otherwise, `expiryTime()` returns `Infinity` and `expiryDate()` returns a `Date` object for &#x22;Tue, 19 Jan 2038 03:14:07 GMT&#
+Otherwise, `expiryTime()` returns `Infinity` and `expiryDate()` returns a `Date` object for "Tue, 19 Jan 2038 03:14:07 GMT&amp;#
 x22; (latest date that can be expressed by a 32-bit `time_t`; the common limit for most user-agents).
 
 ### `.<span class="apidocCodeKeywordSpan">TTL</span>([now=Date.now()])`
 
 compute the TTL relative to `now` (milliseconds).  The same precedence rules as for `expiryTime`/`expiryDate` apply.
 
-The &#x22;number&#x22; `Infinity` is returned for cookies without an explicit expiry and `0` is returned if the cookie is expired
+The "number" `Infinity` is returned for cookies without an explicit expiry and `0` is returned if the cookie is expired
 .  Otherwise a time-to-live in milliseconds is returned.
 
 ### `.canonicalizedDoman()`
@@ -4688,7 +4681,7 @@ The &#x22;number&#x22; `Infinity` is returned for cookies without an explicit ex
 
 compute the TTL relative to `now` (milliseconds).  The same precedence rules as for `expiryTime`/`expiryDate` apply.
 
-The &#x22;number&#x22; `Infinity` is returned for cookies without an explicit expiry and `0` is returned if the cookie is expired
+The "number" `Infinity` is returned for cookies without an explicit expiry and `0` is returned if the cookie is expired
 .  Otherwise a time-to-live in milliseconds is returned.
 
 ### `.canonicalizedDoman()`
@@ -4721,7 +4714,7 @@ For convenience in using `JSON.serialize(cookie)`. Returns a plain-old `Object` 
 Does the reverse of `cookie.toJSON()`. If passed a string, will `JSON.parse()` that first.
 
 Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are parsed via `Date.parse()`, not the tough-cookie `
-parseDate`, since it&#x27;s JavaScript/JSON-y timestamps being handled at this layer.
+parseDate`, since it's JavaScript/JSON-y timestamps being handled at this layer.
 
 Returns `null` upon JSON parsing error.
 
@@ -4747,12 +4740,12 @@ Status: *IN PROGRESS*. Works for a few things, but is by no means comprehensive.
     <li>description and source-code<pre class="apidocCodePre">function cookieString() {
   var val = this.value;
   if (val == null) {
-    val = &#x27;&#x27;;
+    val = '';
   }
-  if (this.key === &#x27;&#x27;) {
+  if (this.key === '') {
     return val;
   }
-  return this.key+&#x27;=&#x27;+val;
+  return this.key+'='+val;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -4765,12 +4758,12 @@ encode to a Set-Cookie header value.  The Expires cookie field is set using `for
 
 ### `.<span class="apidocCodeKeywordSpan">cookieString</span>()`
 
-encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with &#x27;=&#x27;).
+encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with '=').
 
 ### `.setExpires(String)`
 
-sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can&#x27;t parse this date
- string), `.expires` is set to `&#x22;Infinity&#x22;` (a string) is set.
+sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can't parse this date
+ string), `.expires` is set to `"Infinity"` (a string) is set.
 ...</pre></li>
     </ul>
 
@@ -4797,7 +4790,7 @@ sets the expiry based on a date-string passed through `parseDate()`.  If parseDa
 
 ### `.setMaxAge(number)`
 
-sets the maxAge in seconds.  Coerces `-Infinity` to `&#x22;-Infinity&#x22;` and `Infinity` to `&#x22;Infinity&#x22;` so it JSON
+sets the maxAge in seconds.  Coerces `-Infinity` to `"-Infinity"` and `Infinity` to `"Infinity"` so it JSON
 serializes correctly.
 
 ### `.expiryTime([now=Date.now()])`
@@ -4810,7 +4803,7 @@ expiryTime() Computes the absolute unix-epoch milliseconds that this cookie expi
 Max-Age takes precedence over Expires (as per the RFC). The `.creation` attribute -- or, by default, the `now` paramter -- is used
  to offset the `.maxAge` attribute.
 
-If Expires (`.expires`) is set, that&#x27;s returned.
+If Expires (`.expires`) is set, that's returned.
 ...</pre></li>
     </ul>
 
@@ -4826,7 +4819,7 @@ If Expires (`.expires`) is set, that&#x27;s returned.
     <li>description and source-code<pre class="apidocCodePre">function expiryTime(now) {
   if (this.maxAge != null) {
     var relativeTo = now || this.creation || new Date();
-    var age = (this.maxAge &#x3c;= 0) ? -Infinity : this.maxAge*1000;
+    var age = (this.maxAge &lt;= 0) ? -Infinity : this.maxAge*1000;
     return relativeTo.getTime() + age;
   }
 
@@ -4837,12 +4830,12 @@ If Expires (`.expires`) is set, that&#x27;s returned.
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can&#x27;t parse this date
- string), `.expires` is set to `&#x22;Infinity&#x22;` (a string) is set.
+sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can't parse this date
+ string), `.expires` is set to `"Infinity"` (a string) is set.
 
 ### `.setMaxAge(number)`
 
-sets the maxAge in seconds.  Coerces `-Infinity` to `&#x22;-Infinity&#x22;` and `Infinity` to `&#x22;Infinity&#x22;` so it JSON
+sets the maxAge in seconds.  Coerces `-Infinity` to `"-Infinity"` and `Infinity` to `"Infinity"` so it JSON
 serializes correctly.
 
 ### `.<span class="apidocCodeKeywordSpan">expiryTime</span>([now=Date.now()])`
@@ -4868,21 +4861,21 @@ Max-Age takes precedence over Expires (as per the RFC). The `.creation` attribut
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function inspect() {
   var now = Date.now();
-  return &#x27;Cookie=&#x22;&#x27;+this.toString() +
-    &#x27;; hostOnly=&#x27;+(this.hostOnly != null ? this.hostOnly : &#x27;?&#x27;) +
-    &#x27;; aAge=&#x27;+(this.lastAccessed ? (now-this.lastAccessed.getTime())+&#x27;ms&#x27; : &#x27;?&#x27;) +
-    &#x27;; cAge=&#x27;+(this.creation ? (now-this.creation.getTime())+&#x27;ms&#x27; : &#x27;?&#x27;) +
-    &#x27;&#x22;&#x27;;
+  return 'Cookie="'+this.toString() +
+    '; hostOnly='+(this.hostOnly != null ? this.hostOnly : '?') +
+    '; aAge='+(this.lastAccessed ? (now-this.lastAccessed.getTime())+'ms' : '?') +
+    '; cAge='+(this.creation ? (now-this.creation.getTime())+'ms' : '?') +
+    '"';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 MemoryCookieStore.prototype.idx = null;
 
-// Since it&#x27;s just a struct in RAM, this Store is synchronous
+// Since it's just a struct in RAM, this Store is synchronous
 MemoryCookieStore.prototype.synchronous = true;
 
 // force a default depth:
 MemoryCookieStore.prototype.inspect = function() {
-return &#x22;{ idx: &#x22;+util.<span class="apidocCodeKeywordSpan">inspect</span>(this.idx, false, 2)+&#x27; }&#x27;;
+return "{ idx: "+util.<span class="apidocCodeKeywordSpan">inspect</span>(this.idx, false, 2)+' }';
 };
 
 MemoryCookieStore.prototype.findCookie = function(domain, path, key, cb) {
@@ -4921,7 +4914,7 @@ if (!this.idx[domain][path]) {
   if (exp instanceof Date) {
     this.expires = exp;
   } else {
-    this.expires = parseDate(exp) || &#x22;Infinity&#x22;;
+    this.expires = parseDate(exp) || "Infinity";
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
@@ -4931,16 +4924,16 @@ encode to a Set-Cookie header value.  The Expires cookie field is set using `for
 
 ### `.cookieString()`
 
-encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with &#x27;=&#x27;).
+encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with '=').
 
 ### `.<span class="apidocCodeKeywordSpan">setExpires</span>(String)`
 
-sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can&#x27;t parse this date
- string), `.expires` is set to `&#x22;Infinity&#x22;` (a string) is set.
+sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can't parse this date
+ string), `.expires` is set to `"Infinity"` (a string) is set.
 
 ### `.setMaxAge(number)`
 
-sets the maxAge in seconds.  Coerces `-Infinity` to `&#x22;-Infinity&#x22;` and `Infinity` to `&#x22;Infinity&#x22;` so it JSON
+sets the maxAge in seconds.  Coerces `-Infinity` to `"-Infinity"` and `Infinity` to `"Infinity"` so it JSON
 serializes correctly.
 ...</pre></li>
     </ul>
@@ -4963,16 +4956,16 @@ serializes correctly.
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with &#x27;=&#x27;).
+encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with '=').
 
 ### `.setExpires(String)`
 
-sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can&#x27;t parse this date
- string), `.expires` is set to `&#x22;Infinity&#x22;` (a string) is set.
+sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can't parse this date
+ string), `.expires` is set to `"Infinity"` (a string) is set.
 
 ### `.<span class="apidocCodeKeywordSpan">setMaxAge</span>(number)`
 
-sets the maxAge in seconds.  Coerces `-Infinity` to `&#x22;-Infinity&#x22;` and `Infinity` to `&#x22;Infinity&#x22;` so it JSON
+sets the maxAge in seconds.  Coerces `-Infinity` to `"-Infinity"` and `Infinity` to `"Infinity"` so it JSON
 serializes correctly.
 
 ### `.expiryTime([now=Date.now()])`
@@ -4994,23 +4987,23 @@ serializes correctly.
   var obj = {};
 
   var props = Cookie.serializableProperties;
-  for (var i=0; i&#x3c;props.length; i++) {
+  for (var i=0; i&lt;props.length; i++) {
     var prop = props[i];
     if (this[prop] === Cookie.prototype[prop]) {
       continue; // leave as prototype default
     }
 
-    if (prop === &#x27;expires&#x27; ||
-        prop === &#x27;creation&#x27; ||
-        prop === &#x27;lastAccessed&#x27;)
+    if (prop === 'expires' ||
+        prop === 'creation' ||
+        prop === 'lastAccessed')
     {
       if (this[prop] === null) {
         obj[prop] = null;
       } else {
-        obj[prop] = this[prop] == &#x22;Infinity&#x22; ? // intentionally not ===
-          &#x22;Infinity&#x22; : this[prop].toISOString();
+        obj[prop] = this[prop] == "Infinity" ? // intentionally not ===
+          "Infinity" : this[prop].toISOString();
       }
-    } else if (prop === &#x27;maxAge&#x27;) {
+    } else if (prop === 'maxAge') {
       if (this[prop] !== null) {
         // again, intentionally not ===
         obj[prop] = (this[prop] == Infinity || this[prop] == -Infinity) ?
@@ -5060,32 +5053,32 @@ Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are e
 
   if (this.expires != Infinity) {
     if (this.expires instanceof Date) {
-      str += &#x27;; Expires=&#x27;+formatDate(this.expires);
+      str += '; Expires='+formatDate(this.expires);
     } else {
-      str += &#x27;; Expires=&#x27;+this.expires;
+      str += '; Expires='+this.expires;
     }
   }
 
-  if (this.maxAge != null &#x26;&#x26; this.maxAge != Infinity) {
-    str += &#x27;; Max-Age=&#x27;+this.maxAge;
+  if (this.maxAge != null &amp;&amp; this.maxAge != Infinity) {
+    str += '; Max-Age='+this.maxAge;
   }
 
-  if (this.domain &#x26;&#x26; !this.hostOnly) {
-    str += &#x27;; Domain=&#x27;+this.domain;
+  if (this.domain &amp;&amp; !this.hostOnly) {
+    str += '; Domain='+this.domain;
   }
   if (this.path) {
-    str += &#x27;; Path=&#x27;+this.path;
+    str += '; Path='+this.path;
   }
 
   if (this.secure) {
-    str += &#x27;; Secure&#x27;;
+    str += '; Secure';
   }
   if (this.httpOnly) {
-    str += &#x27;; HttpOnly&#x27;;
+    str += '; HttpOnly';
   }
   if (this.extensions) {
     this.extensions.forEach(function(ext) {
-      str += &#x27;; &#x27;+ext;
+      str += '; '+ext;
     });
   }
 
@@ -5095,17 +5088,17 @@ Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are e
 # Synopsis
 
 ``` javascript
-var tough = require(&#x27;tough-cookie&#x27;);
+var tough = require('tough-cookie');
 var Cookie = tough.Cookie;
 var cookie = Cookie.parse(header);
-cookie.value = &#x27;somethingdifferent&#x27;;
+cookie.value = 'somethingdifferent';
 header = cookie.<span class="apidocCodeKeywordSpan">toString</span>();
 
 var cookiejar = new tough.CookieJar();
-cookiejar.setCookie(cookie, &#x27;http://currentdomain.example.com/path&#x27;, cb);
+cookiejar.setCookie(cookie, 'http://currentdomain.example.com/path', cb);
 // ...
-cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cookies) {
-  res.headers[&#x27;cookie&#x27;] = cookies.join(&#x27;; &#x27;);
+cookiejar.getCookies('http://example.com/otherpath',function(err,cookies) {
+  res.headers['cookie'] = cookies.join('; ');
 });
 ...</pre></li>
     </ul>
@@ -5123,13 +5116,13 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   if (!COOKIE_OCTETS.test(this.value)) {
     return false;
   }
-  if (this.expires != Infinity &#x26;&#x26; !(this.expires instanceof Date) &#x26;&#x26; !parseDate(this.expires)) {
+  if (this.expires != Infinity &amp;&amp; !(this.expires instanceof Date) &amp;&amp; !parseDate(this.expires)) {
     return false;
   }
-  if (this.maxAge != null &#x26;&#x26; this.maxAge &#x3c;= 0) {
-    return false; // &#x22;Max-Age=&#x22; non-zero-digit *DIGIT
+  if (this.maxAge != null &amp;&amp; this.maxAge &lt;= 0) {
+    return false; // "Max-Age=" non-zero-digit *DIGIT
   }
-  if (this.path != null &#x26;&#x26; !PATH_VALUE.test(this.path)) {
+  if (this.path != null &amp;&amp; !PATH_VALUE.test(this.path)) {
     return false;
   }
 
@@ -5139,7 +5132,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
       return false; // S4.1.2.3 suggests that this is bad. domainMatch() tests confirm this
     }
     var suffix = pubsuffix.getPublicSuffix(cdomain);
-    if (suffix == null) { // it&#x27;s a public suffix
+    if (suffix == null) { // it's a public suffix
       return false;
     }
   }
@@ -5157,7 +5150,7 @@ Does a deep clone of this cookie, exactly implemented as `Cookie.fromJSON(cookie
 
 Status: *IN PROGRESS*. Works for a few things, but is by no means comprehensive.
 
-validates cookie attributes for semantic correctness.  Useful for &#x22;lint&#x22; checking any Set-Cookie headers you generate.
+validates cookie attributes for semantic correctness.  Useful for "lint" checking any Set-Cookie headers you generate.
 For now, it returns a boolean, but eventually could return a reason string -- you can future-proof with this construct:
 
 ``` javascript
@@ -5208,7 +5201,7 @@ if (cookie.validate() === true) {
    * (Concurs with S5.3 step 3)
    */
 </span>  if (this.maxAge != null) {
-    return this.maxAge&#x3c;=0 ? 0 : this.maxAge*1000;
+    return this.maxAge&lt;=0 ? 0 : this.maxAge*1000;
   }
 
   var expires = this.expires;
@@ -5231,16 +5224,16 @@ if (cookie.validate() === true) {
 Max-Age takes precedence over Expires (as per the RFC). The `.creation` attribute -- or, by default, the `now` paramter -- is used
  to offset the `.maxAge` attribute.
 
-If Expires (`.expires`) is set, that&#x27;s returned.
+If Expires (`.expires`) is set, that's returned.
 
-Otherwise, `expiryTime()` returns `Infinity` and `expiryDate()` returns a `Date` object for &#x22;Tue, 19 Jan 2038 03:14:07 GMT&#
+Otherwise, `expiryTime()` returns `Infinity` and `expiryDate()` returns a `Date` object for "Tue, 19 Jan 2038 03:14:07 GMT&amp;#
 x22; (latest date that can be expressed by a 32-bit `time_t`; the common limit for most user-agents).
 
 ### `.<span class="apidocCodeKeywordSpan">TTL</span>([now=Date.now()])`
 
 compute the TTL relative to `now` (milliseconds).  The same precedence rules as for `expiryTime`/`expiryDate` apply.
 
-The &#x22;number&#x22; `Infinity` is returned for cookies without an explicit expiry and `0` is returned if the cookie is expired
+The "number" `Infinity` is returned for cookies without an explicit expiry and `0` is returned if the cookie is expired
 .  Otherwise a time-to-live in milliseconds is returned.
 
 ### `.canonicalizedDoman()`
@@ -5292,7 +5285,7 @@ The &#x22;number&#x22; `Infinity` is returned for cookies without an explicit ex
 Does the reverse of `cookie.toJSON()`. If passed a string, will `JSON.parse()` that first.
 
 Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are parsed via `Date.parse()`, not the tough-cookie `
-parseDate`, since it&#x27;s JavaScript/JSON-y timestamps being handled at this layer.
+parseDate`, since it's JavaScript/JSON-y timestamps being handled at this layer.
 
 Returns `null` upon JSON parsing error.
 
@@ -5323,12 +5316,12 @@ Status: *IN PROGRESS*. Works for a few things, but is by no means comprehensive.
     <li>description and source-code<pre class="apidocCodePre">function cookieString() {
   var val = this.value;
   if (val == null) {
-    val = &#x27;&#x27;;
+    val = '';
   }
-  if (this.key === &#x27;&#x27;) {
+  if (this.key === '') {
     return val;
   }
-  return this.key+&#x27;=&#x27;+val;
+  return this.key+'='+val;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -5341,12 +5334,12 @@ encode to a Set-Cookie header value.  The Expires cookie field is set using `for
 
 ### `.<span class="apidocCodeKeywordSpan">cookieString</span>()`
 
-encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with &#x27;=&#x27;).
+encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with '=').
 
 ### `.setExpires(String)`
 
-sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can&#x27;t parse this date
- string), `.expires` is set to `&#x22;Infinity&#x22;` (a string) is set.
+sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can't parse this date
+ string), `.expires` is set to `"Infinity"` (a string) is set.
 ...</pre></li>
     </ul>
 
@@ -5378,7 +5371,7 @@ sets the expiry based on a date-string passed through `parseDate()`.  If parseDa
 
 ### `.setMaxAge(number)`
 
-sets the maxAge in seconds.  Coerces `-Infinity` to `&#x22;-Infinity&#x22;` and `Infinity` to `&#x22;Infinity&#x22;` so it JSON
+sets the maxAge in seconds.  Coerces `-Infinity` to `"-Infinity"` and `Infinity` to `"Infinity"` so it JSON
 serializes correctly.
 
 ### `.expiryTime([now=Date.now()])`
@@ -5391,7 +5384,7 @@ expiryTime() Computes the absolute unix-epoch milliseconds that this cookie expi
 Max-Age takes precedence over Expires (as per the RFC). The `.creation` attribute -- or, by default, the `now` paramter -- is used
  to offset the `.maxAge` attribute.
 
-If Expires (`.expires`) is set, that&#x27;s returned.
+If Expires (`.expires`) is set, that's returned.
 ...</pre></li>
     </ul>
 
@@ -5412,7 +5405,7 @@ If Expires (`.expires`) is set, that&#x27;s returned.
     <li>description and source-code<pre class="apidocCodePre">function expiryTime(now) {
   if (this.maxAge != null) {
     var relativeTo = now || this.creation || new Date();
-    var age = (this.maxAge &#x3c;= 0) ? -Infinity : this.maxAge*1000;
+    var age = (this.maxAge &lt;= 0) ? -Infinity : this.maxAge*1000;
     return relativeTo.getTime() + age;
   }
 
@@ -5423,12 +5416,12 @@ If Expires (`.expires`) is set, that&#x27;s returned.
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can&#x27;t parse this date
- string), `.expires` is set to `&#x22;Infinity&#x22;` (a string) is set.
+sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can't parse this date
+ string), `.expires` is set to `"Infinity"` (a string) is set.
 
 ### `.setMaxAge(number)`
 
-sets the maxAge in seconds.  Coerces `-Infinity` to `&#x22;-Infinity&#x22;` and `Infinity` to `&#x22;Infinity&#x22;` so it JSON
+sets the maxAge in seconds.  Coerces `-Infinity` to `"-Infinity"` and `Infinity` to `"Infinity"` so it JSON
 serializes correctly.
 
 ### `.<span class="apidocCodeKeywordSpan">expiryTime</span>([now=Date.now()])`
@@ -5459,21 +5452,21 @@ Max-Age takes precedence over Expires (as per the RFC). The `.creation` attribut
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function inspect() {
   var now = Date.now();
-  return &#x27;Cookie=&#x22;&#x27;+this.toString() +
-    &#x27;; hostOnly=&#x27;+(this.hostOnly != null ? this.hostOnly : &#x27;?&#x27;) +
-    &#x27;; aAge=&#x27;+(this.lastAccessed ? (now-this.lastAccessed.getTime())+&#x27;ms&#x27; : &#x27;?&#x27;) +
-    &#x27;; cAge=&#x27;+(this.creation ? (now-this.creation.getTime())+&#x27;ms&#x27; : &#x27;?&#x27;) +
-    &#x27;&#x22;&#x27;;
+  return 'Cookie="'+this.toString() +
+    '; hostOnly='+(this.hostOnly != null ? this.hostOnly : '?') +
+    '; aAge='+(this.lastAccessed ? (now-this.lastAccessed.getTime())+'ms' : '?') +
+    '; cAge='+(this.creation ? (now-this.creation.getTime())+'ms' : '?') +
+    '"';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 MemoryCookieStore.prototype.idx = null;
 
-// Since it&#x27;s just a struct in RAM, this Store is synchronous
+// Since it's just a struct in RAM, this Store is synchronous
 MemoryCookieStore.prototype.synchronous = true;
 
 // force a default depth:
 MemoryCookieStore.prototype.inspect = function() {
-return &#x22;{ idx: &#x22;+util.<span class="apidocCodeKeywordSpan">inspect</span>(this.idx, false, 2)+&#x27; }&#x27;;
+return "{ idx: "+util.<span class="apidocCodeKeywordSpan">inspect</span>(this.idx, false, 2)+' }';
 };
 
 MemoryCookieStore.prototype.findCookie = function(domain, path, key, cb) {
@@ -5522,7 +5515,7 @@ if (!this.idx[domain][path]) {
   if (exp instanceof Date) {
     this.expires = exp;
   } else {
-    this.expires = parseDate(exp) || &#x22;Infinity&#x22;;
+    this.expires = parseDate(exp) || "Infinity";
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
@@ -5532,16 +5525,16 @@ encode to a Set-Cookie header value.  The Expires cookie field is set using `for
 
 ### `.cookieString()`
 
-encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with &#x27;=&#x27;).
+encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with '=').
 
 ### `.<span class="apidocCodeKeywordSpan">setExpires</span>(String)`
 
-sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can&#x27;t parse this date
- string), `.expires` is set to `&#x22;Infinity&#x22;` (a string) is set.
+sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can't parse this date
+ string), `.expires` is set to `"Infinity"` (a string) is set.
 
 ### `.setMaxAge(number)`
 
-sets the maxAge in seconds.  Coerces `-Infinity` to `&#x22;-Infinity&#x22;` and `Infinity` to `&#x22;Infinity&#x22;` so it JSON
+sets the maxAge in seconds.  Coerces `-Infinity` to `"-Infinity"` and `Infinity` to `"Infinity"` so it JSON
 serializes correctly.
 ...</pre></li>
     </ul>
@@ -5569,16 +5562,16 @@ serializes correctly.
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with &#x27;=&#x27;).
+encode to a Cookie header value (i.e. the `.key` and `.value` properties joined with '=').
 
 ### `.setExpires(String)`
 
-sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can&#x27;t parse this date
- string), `.expires` is set to `&#x22;Infinity&#x22;` (a string) is set.
+sets the expiry based on a date-string passed through `parseDate()`.  If parseDate returns `null` (i.e. can't parse this date
+ string), `.expires` is set to `"Infinity"` (a string) is set.
 
 ### `.<span class="apidocCodeKeywordSpan">setMaxAge</span>(number)`
 
-sets the maxAge in seconds.  Coerces `-Infinity` to `&#x22;-Infinity&#x22;` and `Infinity` to `&#x22;Infinity&#x22;` so it JSON
+sets the maxAge in seconds.  Coerces `-Infinity` to `"-Infinity"` and `Infinity` to `"Infinity"` so it JSON
 serializes correctly.
 
 ### `.expiryTime([now=Date.now()])`
@@ -5605,23 +5598,23 @@ serializes correctly.
   var obj = {};
 
   var props = Cookie.serializableProperties;
-  for (var i=0; i&#x3c;props.length; i++) {
+  for (var i=0; i&lt;props.length; i++) {
     var prop = props[i];
     if (this[prop] === Cookie.prototype[prop]) {
       continue; // leave as prototype default
     }
 
-    if (prop === &#x27;expires&#x27; ||
-        prop === &#x27;creation&#x27; ||
-        prop === &#x27;lastAccessed&#x27;)
+    if (prop === 'expires' ||
+        prop === 'creation' ||
+        prop === 'lastAccessed')
     {
       if (this[prop] === null) {
         obj[prop] = null;
       } else {
-        obj[prop] = this[prop] == &#x22;Infinity&#x22; ? // intentionally not ===
-          &#x22;Infinity&#x22; : this[prop].toISOString();
+        obj[prop] = this[prop] == "Infinity" ? // intentionally not ===
+          "Infinity" : this[prop].toISOString();
       }
-    } else if (prop === &#x27;maxAge&#x27;) {
+    } else if (prop === 'maxAge') {
       if (this[prop] !== null) {
         // again, intentionally not ===
         obj[prop] = (this[prop] == Infinity || this[prop] == -Infinity) ?
@@ -5676,17 +5669,17 @@ Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are e
 # Synopsis
 
 ``` javascript
-var tough = require(&#x27;tough-cookie&#x27;);
+var tough = require('tough-cookie');
 var Cookie = tough.Cookie;
 var cookie = Cookie.parse(header);
-cookie.value = &#x27;somethingdifferent&#x27;;
+cookie.value = 'somethingdifferent';
 header = cookie.<span class="apidocCodeKeywordSpan">toString</span>();
 
 var cookiejar = new tough.CookieJar();
-cookiejar.setCookie(cookie, &#x27;http://currentdomain.example.com/path&#x27;, cb);
+cookiejar.setCookie(cookie, 'http://currentdomain.example.com/path', cb);
 // ...
-cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cookies) {
-  res.headers[&#x27;cookie&#x27;] = cookies.join(&#x27;; &#x27;);
+cookiejar.getCookies('http://example.com/otherpath',function(err,cookies) {
+  res.headers['cookie'] = cookies.join('; ');
 });
 ...</pre></li>
     </ul>
@@ -5709,13 +5702,13 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   if (!COOKIE_OCTETS.test(this.value)) {
     return false;
   }
-  if (this.expires != Infinity &#x26;&#x26; !(this.expires instanceof Date) &#x26;&#x26; !parseDate(this.expires)) {
+  if (this.expires != Infinity &amp;&amp; !(this.expires instanceof Date) &amp;&amp; !parseDate(this.expires)) {
     return false;
   }
-  if (this.maxAge != null &#x26;&#x26; this.maxAge &#x3c;= 0) {
-    return false; // &#x22;Max-Age=&#x22; non-zero-digit *DIGIT
+  if (this.maxAge != null &amp;&amp; this.maxAge &lt;= 0) {
+    return false; // "Max-Age=" non-zero-digit *DIGIT
   }
-  if (this.path != null &#x26;&#x26; !PATH_VALUE.test(this.path)) {
+  if (this.path != null &amp;&amp; !PATH_VALUE.test(this.path)) {
     return false;
   }
 
@@ -5725,7 +5718,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
       return false; // S4.1.2.3 suggests that this is bad. domainMatch() tests confirm this
     }
     var suffix = pubsuffix.getPublicSuffix(cdomain);
-    if (suffix == null) { // it&#x27;s a public suffix
+    if (suffix == null) { // it's a public suffix
       return false;
     }
   }
@@ -5743,7 +5736,7 @@ Does a deep clone of this cookie, exactly implemented as `Cookie.fromJSON(cookie
 
 Status: *IN PROGRESS*. Works for a few things, but is by no means comprehensive.
 
-validates cookie attributes for semantic correctness.  Useful for &#x22;lint&#x22; checking any Set-Cookie headers you generate.
+validates cookie attributes for semantic correctness.  Useful for "lint" checking any Set-Cookie headers you generate.
 For now, it returns a boolean, but eventually could return a reason string -- you can future-proof with this construct:
 
 ``` javascript
@@ -5766,7 +5759,7 @@ if (cookie.validate() === true) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function CookieJar(store, options) {
-  if (typeof options === &#x22;boolean&#x22;) {
+  if (typeof options === "boolean") {
     options = {rejectPublicSuffixes: options};
   } else if (options == null) {
     options = {};
@@ -5785,17 +5778,17 @@ if (cookie.validate() === true) {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ``` javascript
-var tough = require(&#x27;tough-cookie&#x27;);
+var tough = require('tough-cookie');
 var Cookie = tough.Cookie;
 var cookie = Cookie.parse(header);
-cookie.value = &#x27;somethingdifferent&#x27;;
+cookie.value = 'somethingdifferent';
 header = cookie.toString();
 
 var cookiejar = new tough.<span class="apidocCodeKeywordSpan">CookieJar</span>();
-cookiejar.setCookie(cookie, &#x27;http://currentdomain.example.com/path&#x27;, cb);
+cookiejar.setCookie(cookie, 'http://currentdomain.example.com/path', cb);
 // ...
-cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cookies) {
-  res.headers[&#x27;cookie&#x27;] = cookies.join(&#x27;; &#x27;);
+cookiejar.getCookies('http://example.com/otherpath',function(err,cookies) {
+  res.headers['cookie'] = cookies.join('; ');
 });
 ```
 ...</pre></li>
@@ -5818,7 +5811,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   }
 
   var serialized;
-  if (typeof strOrObj === &#x27;string&#x27;) {
+  if (typeof strOrObj === 'string') {
     serialized = jsonParse(strOrObj);
     if (serialized instanceof Error) {
       return cb(serialized);
@@ -5866,13 +5859,13 @@ to the callback.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">deserializeSync = function (strOrObj, store) {
-  var serialized = typeof strOrObj === &#x27;string&#x27; ?
+  var serialized = typeof strOrObj === 'string' ?
     JSON.parse(strOrObj) : strOrObj;
   var jar = new CookieJar(store, serialized.rejectPublicSuffixes);
 
   // catch this mistake early:
   if (!jar.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   jar._importCookiesSync(serialized);
@@ -5909,13 +5902,13 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">fromJSON = function (strOrObj, store) {
-  var serialized = typeof strOrObj === &#x27;string&#x27; ?
+  var serialized = typeof strOrObj === 'string' ?
     JSON.parse(strOrObj) : strOrObj;
   var jar = new CookieJar(store, serialized.rejectPublicSuffixes);
 
   // catch this mistake early:
   if (!jar.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   jar._importCookiesSync(serialized);
@@ -5962,7 +5955,7 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
   }
 
   var serialized;
-  if (typeof strOrObj === &#x27;string&#x27;) {
+  if (typeof strOrObj === 'string') {
     serialized = jsonParse(strOrObj);
     if (serialized instanceof Error) {
       return cb(serialized);
@@ -6015,13 +6008,13 @@ to the callback.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">deserializeSync = function (strOrObj, store) {
-  var serialized = typeof strOrObj === &#x27;string&#x27; ?
+  var serialized = typeof strOrObj === 'string' ?
     JSON.parse(strOrObj) : strOrObj;
   var jar = new CookieJar(store, serialized.rejectPublicSuffixes);
 
   // catch this mistake early:
   if (!jar.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   jar._importCookiesSync(serialized);
@@ -6070,7 +6063,7 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
   var jar = this;
   var cookies = serialized.cookies;
   if (!cookies || !Array.isArray(cookies)) {
-    return cb(new Error(&#x27;serialized jar has no cookies array&#x27;));
+    return cb(new Error('serialized jar has no cookies array'));
   }
 
   function putNext(err) {
@@ -6112,7 +6105,7 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
     <ul>
     <li>description and source-code<pre class="apidocCodePre">_importCookiesSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -6158,7 +6151,7 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
 Does the reverse of `cookie.toJSON()`. If passed a string, will `JSON.parse()` that first.
 
 Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are parsed via `Date.parse()`, not the tough-cookie `
-parseDate`, since it&#x27;s JavaScript/JSON-y timestamps being handled at this layer.
+parseDate`, since it's JavaScript/JSON-y timestamps being handled at this layer.
 
 Returns `null` upon JSON parsing error.
 
@@ -6183,7 +6176,7 @@ Status: *IN PROGRESS*. Works for a few things, but is by no means comprehensive.
     <ul>
     <li>description and source-code<pre class="apidocCodePre">cloneSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -6203,7 +6196,7 @@ Status: *IN PROGRESS*. Works for a few things, but is by no means comprehensive.
 
 ### `.clone([store,]cb(err,newJar))`
 
-Produces a deep clone of this jar. Modifications to the original won&#x27;t affect the clone, and vice versa.
+Produces a deep clone of this jar. Modifications to the original won't affect the clone, and vice versa.
 
 The `store` argument is optional, but should be an instance of `Store`. By default, a new instance of `MemoryCookieStore` is created
 . Transferring between store types is supported so long as the source implements `.getAllCookies()` and the destination implements
@@ -6242,7 +6235,7 @@ Recall that `MemoryCookieStore` supports both synchronous and asynchronous API c
         .map(function(c){
           return c.cookieString();
         })
-        .join(&#x27;; &#x27;));
+        .join('; '));
     }
   };
   args.push(next);
@@ -6278,7 +6271,7 @@ Synchronous version of `getCookieString`; only works with synchronous stores (e.
     <ul>
     <li>description and source-code<pre class="apidocCodePre">getCookieStringSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -6331,11 +6324,11 @@ Returns an array of strings suitable for **Set-Cookie** headers. Accepts the sam
   }
 
   var host = canonicalDomain(context.hostname);
-  var path = context.pathname || &#x27;/&#x27;;
+  var path = context.pathname || '/';
 
   var secure = options.secure;
-  if (secure == null &#x26;&#x26; context.protocol &#x26;&#x26;
-      (context.protocol == &#x27;https:&#x27; || context.protocol == &#x27;wss:&#x27;))
+  if (secure == null &amp;&amp; context.protocol &amp;&amp;
+      (context.protocol == 'https:' || context.protocol == 'wss:'))
   {
     secure = true;
   }
@@ -6351,12 +6344,12 @@ Returns an array of strings suitable for **Set-Cookie** headers. Accepts the sam
   var store = this.store;
 
   function matchingCookie(c) {
-    // &#x22;Either:
-    //   The cookie&#x27;s host-only-flag is true and the canonicalized
-    //   request-host is identical to the cookie&#x27;s domain.
+    // "Either:
+    //   The cookie's host-only-flag is true and the canonicalized
+    //   request-host is identical to the cookie's domain.
     // Or:
-    //   The cookie&#x27;s host-only-flag is false and the canonicalized
-    //   request-host domain-matches the cookie&#x27;s domain.&#x22;
+    //   The cookie's host-only-flag is false and the canonicalized
+    //   request-host domain-matches the cookie's domain."
     if (c.hostOnly) {
       if (c.domain != host) {
         return false;
@@ -6367,26 +6360,26 @@ Returns an array of strings suitable for **Set-Cookie** headers. Accepts the sam
       }
     }
 
-    // &#x22;The request-uri&#x27;s path path-matches the cookie&#x27;s path.&#x22;
-    if (!allPaths &#x26;&#x26; !pathMatch(path, c.path)) {
+    // "The request-uri's path path-matches the cookie's path."
+    if (!allPaths &amp;&amp; !pathMatch(path, c.path)) {
       return false;
     }
 
-    // &#x22;If the cookie&#x27;s secure-only-flag is true, then the request-uri&#x27;s
-    // scheme must denote a &#x22;secure&#x22; protocol&#x22;
-    if (c.secure &#x26;&#x26; !secure) {
+    // "If the cookie's secure-only-flag is true, then the request-uri's
+    // scheme must denote a "secure" protocol"
+    if (c.secure &amp;&amp; !secure) {
       return false;
     }
 
-    // &#x22;If the cookie&#x27;s http-only-flag is true, then exclude the cookie if the
-    // cookie-string is being generated for a &#x22;non-HTTP&#x22; API&#x22;
-    if (c.httpOnly &#x26;&#x26; !http) {
+    // "If the cookie's http-only-flag is true, then exclude the cookie if the
+    // cookie-string is being generated for a "non-HTTP" API"
+    if (c.httpOnly &amp;&amp; !http) {
       return false;
     }
 
     // deferred from S5.3
     // non-RFC: allow retention of expired cookies by choice
-    if (expireCheck &#x26;&#x26; c.expiryTime() &#x3c;= now) {
+    if (expireCheck &amp;&amp; c.expiryTime() &lt;= now) {
       store.removeCookie(c.domain, c.path, c.key, function(){}); // result ignored
       return false;
     }
@@ -6418,20 +6411,20 @@ Returns an array of strings suitable for **Set-Cookie** headers. Accepts the sam
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 var cookie = Cookie.parse(header);
-cookie.value = &#x27;somethingdifferent&#x27;;
+cookie.value = 'somethingdifferent';
 header = cookie.toString();
 
 var cookiejar = new tough.CookieJar();
-cookiejar.setCookie(cookie, &#x27;http://currentdomain.example.com/path&#x27;, cb);
+cookiejar.setCookie(cookie, 'http://currentdomain.example.com/path', cb);
 // ...
-cookiejar.<span class="apidocCodeKeywordSpan">getCookies</span>(&#x27;http://example.com/otherpath&#x27;,function(err,cookies) {
-  res.headers[&#x27;cookie&#x27;] = cookies.join(&#x27;; &#x27;);
+cookiejar.<span class="apidocCodeKeywordSpan">getCookies</span>('http://example.com/otherpath',function(err,cookies) {
+  res.headers['cookie'] = cookies.join('; ');
 });
 ```
 
 # Installation
 
-It&#x27;s _so_ easy!
+It's _so_ easy!
 ...</pre></li>
     </ul>
 
@@ -6446,7 +6439,7 @@ It&#x27;s _so_ easy!
     <ul>
     <li>description and source-code<pre class="apidocCodePre">getCookiesSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -6463,7 +6456,7 @@ It&#x27;s _so_ easy!
   return syncResult;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  * _secure_ - boolean - autodetect from url - indicates if this is a &#x22;Secure&#x22; API.  If the currentUrl starts with `https
+  * _secure_ - boolean - autodetect from url - indicates if this is a "Secure" API.  If the currentUrl starts with `https
 :` or `wss:` then this is defaulted to `true`, otherwise `false`.
   * _now_ - Date - default `new Date()` - what to use for the creation/access time of cookies
   * _expire_ - boolean - default `true` - perform expiry-time checking of cookies and asynchronously remove expired cookies from
@@ -6540,7 +6533,7 @@ Synchronous version of `getSetCookieStrings`; only works with synchronous stores
     <ul>
     <li>description and source-code<pre class="apidocCodePre">getSetCookieStringsSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -6586,16 +6579,16 @@ Serialize the Jar if the underlying store supports `.getAllCookies`.
     <ul>
     <li>description and source-code<pre class="apidocCodePre">serialize = function (cb) {
   var type = this.store.constructor.name;
-  if (type === &#x27;Object&#x27;) {
+  if (type === 'Object') {
     type = null;
   }
 
-  // update README.md &#x22;Serialization Format&#x22; if you change this, please!
+  // update README.md "Serialization Format" if you change this, please!
   var serialized = {
     // The version of tough-cookie that serialized this jar. Generally a good
     // practice since future versions can make data import decisions based on
     // known past behavior. When/if this matters, use `semver`.
-    version: &#x27;tough-cookie@&#x27;+VERSION,
+    version: 'tough-cookie@'+VERSION,
 
     // add the store type, to make humans happy:
     storeType: type,
@@ -6607,10 +6600,10 @@ Serialize the Jar if the underlying store supports `.getAllCookies`.
     cookies: []
   };
 
-  if (!(this.store.getAllCookies &#x26;&#x26;
-        typeof this.store.getAllCookies === &#x27;function&#x27;))
+  if (!(this.store.getAllCookies &amp;&amp;
+        typeof this.store.getAllCookies === 'function'))
   {
-    return cb(new Error(&#x27;store does not support getAllCookies and cannot be serialized&#x27;));
+    return cb(new Error('store does not support getAllCookies and cannot be serialized'));
   }
 
   this.store.getAllCookies(function(err,cookies) {
@@ -6619,7 +6612,7 @@ Serialize the Jar if the underlying store supports `.getAllCookies`.
     }
 
     serialized.cookies = cookies.map(function(cookie) {
-      // convert to serialized &#x27;raw&#x27; cookies
+      // convert to serialized 'raw' cookies
       cookie = (cookie instanceof Cookie) ? cookie.toJSON() : cookie;
 
       // Remove the index so new ones get assigned during deserialization
@@ -6664,7 +6657,7 @@ Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are e
     <ul>
     <li>description and source-code<pre class="apidocCodePre">serializeSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -6727,7 +6720,7 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
     cookie = Cookie.parse(cookie, { loose: loose });
   }
   if (!cookie) {
-    err = new Error(&#x22;Cookie failed to parse&#x22;);
+    err = new Error("Cookie failed to parse");
     return cb(options.ignoreError ? null : err);
   }
 
@@ -6739,10 +6732,10 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
   // S5.3 step 4: NOOP; domain is null by default
 
   // S5.3 step 5: public suffixes
-  if (this.rejectPublicSuffixes &#x26;&#x26; cookie.domain) {
+  if (this.rejectPublicSuffixes &amp;&amp; cookie.domain) {
     var suffix = pubsuffix.getPublicSuffix(cookie.cdomain());
-    if (suffix == null) { // e.g. &#x22;com&#x22;
-      err = new Error(&#x22;Cookie has domain set to a public suffix&#x22;);
+    if (suffix == null) { // e.g. "com"
+      err = new Error("Cookie has domain set to a public suffix");
       return cb(options.ignoreError ? null : err);
     }
   }
@@ -6750,11 +6743,11 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
   // S5.3 step 6:
   if (cookie.domain) {
     if (!domainMatch(host, cookie.cdomain(), false)) {
-      err = new Error(&#x22;Cookie not in this host&#x27;s domain. Cookie:&#x22;+cookie.cdomain()+&#x22; Request:&#x22;+host);
+      err = new Error("Cookie not in this host's domain. Cookie:"+cookie.cdomain()+" Request:"+host);
       return cb(options.ignoreError ? null : err);
     }
 
-    if (cookie.hostOnly == null) { // don&#x27;t reset if already set
+    if (cookie.hostOnly == null) { // don't reset if already set
       cookie.hostOnly = false;
     }
 
@@ -6764,9 +6757,9 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
   }
 
   //S5.2.4 If the attribute-value is empty or if the first character of the
-  //attribute-value is not %x2F (&#x22;/&#x22;):
+  //attribute-value is not %x2F ("/"):
   //Let cookie-path be the default-path.
-  if (!cookie.path || cookie.path[0] !== &#x27;/&#x27;) {
+  if (!cookie.path || cookie.path[0] !== '/') {
     cookie.path = defaultPath(context.pathname);
     cookie.pathIsDefault = true;
   }
@@ -6775,8 +6768,8 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
   // S5.3 step 9: NOOP; httpOnly attribute
 
   // S5.3 step 10
-  if (options.http === false &#x26;&#x26; cookie.httpOnly) {
-    err = new Error(&#x22;Cookie is HttpOnly and this isn&#x27;t an HTTP API&#x22;);
+  if (options.http === false &amp;&amp; cookie.httpOnly) {
+    err = new Error("Cookie is HttpOnly and this isn't an HTTP API");
     return cb(options.ignoreError ? null : err);
   }
 
@@ -6802,10 +6795,10 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
     };
 
     if (oldCookie) {
-      // S5.3 step 11 - &#x22;If the cookie store contains a cookie with the same name,
-      // domain, and path as the newly created cookie:&#x22;
-      if (options.http === false &#x26;&#x26; oldCookie.httpOnly) { // step 11.2
-        err = new Error(&#x22;old Cookie is HttpOnly and this isn&#x27;t an HTTP API&#x22;);
+      // S5.3 step 11 - "If the cookie store contains a cookie with the same name,
+      // domain, and path as the newly created cookie:"
+      if (options.http === false &amp;&amp; oldCookie.httpOnly) { // step 11.2
+        err = new Error("old Cookie is HttpOnly and this isn't an HTTP API");
         return cb(options.ignoreError ? null : err);
       }
       cookie.creation = oldCookie.creation; // step 11.3
@@ -6823,17 +6816,17 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
   store.findCookie(cookie.domain, cookie.path, cookie.key, withCookie);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-var tough = require(&#x27;tough-cookie&#x27;);
+var tough = require('tough-cookie');
 var Cookie = tough.Cookie;
 var cookie = Cookie.parse(header);
-cookie.value = &#x27;somethingdifferent&#x27;;
+cookie.value = 'somethingdifferent';
 header = cookie.toString();
 
 var cookiejar = new tough.CookieJar();
-cookiejar.<span class="apidocCodeKeywordSpan">setCookie</span>(cookie, &#x27;http://currentdomain.example.com/path&#x27;, cb);
+cookiejar.<span class="apidocCodeKeywordSpan">setCookie</span>(cookie, 'http://currentdomain.example.com/path', cb);
 // ...
-cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cookies) {
-  res.headers[&#x27;cookie&#x27;] = cookies.join(&#x27;; &#x27;);
+cookiejar.getCookies('http://example.com/otherpath',function(err,cookies) {
+  res.headers['cookie'] = cookies.join('; ');
 });
 ```
 
@@ -6852,7 +6845,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     <ul>
     <li>description and source-code<pre class="apidocCodePre">setCookieSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -6870,13 +6863,13 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   * _http_ - boolean - default `true` - indicates if this is an HTTP or non-HTTP API.  Affects HttpOnly cookies.
-  * _secure_ - boolean - autodetect from url - indicates if this is a &#x22;Secure&#x22; API.  If the currentUrl starts with `https
+  * _secure_ - boolean - autodetect from url - indicates if this is a "Secure" API.  If the currentUrl starts with `https
 :` or `wss:` then this is defaulted to `true`, otherwise `false`.
   * _now_ - Date - default `new Date()` - what to use for the creation/access time of cookies
   * _ignoreError_ - boolean - default `false` - silently ignore things like parse errors and invalid domains.  `Store` errors aren
-&#x27;t ignored by this option.
+'t ignored by this option.
 
-As per the RFC, the `.hostOnly` property is set if there was no &#x22;Domain=&#x22; parameter in the cookie string (or `.domain`
+As per the RFC, the `.hostOnly` property is set if there was no "Domain=" parameter in the cookie string (or `.domain`
 was null on the Cookie object).  The `.domain` property is set to the fully-qualified hostname of `currentUrl` in this case.  Matching
  this cookie requires an exact hostname match (not a `domainMatch` as per usual).
 
@@ -6943,7 +6936,7 @@ Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are e
   var jar = this;
   var cookies = serialized.cookies;
   if (!cookies || !Array.isArray(cookies)) {
-    return cb(new Error(&#x27;serialized jar has no cookies array&#x27;));
+    return cb(new Error('serialized jar has no cookies array'));
   }
 
   function putNext(err) {
@@ -6990,7 +6983,7 @@ Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are e
     <ul>
     <li>description and source-code<pre class="apidocCodePre">_importCookiesSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -7041,7 +7034,7 @@ Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are e
 Does the reverse of `cookie.toJSON()`. If passed a string, will `JSON.parse()` that first.
 
 Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are parsed via `Date.parse()`, not the tough-cookie `
-parseDate`, since it&#x27;s JavaScript/JSON-y timestamps being handled at this layer.
+parseDate`, since it's JavaScript/JSON-y timestamps being handled at this layer.
 
 Returns `null` upon JSON parsing error.
 
@@ -7071,7 +7064,7 @@ Status: *IN PROGRESS*. Works for a few things, but is by no means comprehensive.
     <ul>
     <li>description and source-code<pre class="apidocCodePre">cloneSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -7091,7 +7084,7 @@ Status: *IN PROGRESS*. Works for a few things, but is by no means comprehensive.
 
 ### `.clone([store,]cb(err,newJar))`
 
-Produces a deep clone of this jar. Modifications to the original won&#x27;t affect the clone, and vice versa.
+Produces a deep clone of this jar. Modifications to the original won't affect the clone, and vice versa.
 
 The `store` argument is optional, but should be an instance of `Store`. By default, a new instance of `MemoryCookieStore` is created
 . Transferring between store types is supported so long as the source implements `.getAllCookies()` and the destination implements
@@ -7135,7 +7128,7 @@ Recall that `MemoryCookieStore` supports both synchronous and asynchronous API c
         .map(function(c){
           return c.cookieString();
         })
-        .join(&#x27;; &#x27;));
+        .join('; '));
     }
   };
   args.push(next);
@@ -7176,7 +7169,7 @@ Synchronous version of `getCookieString`; only works with synchronous stores (e.
     <ul>
     <li>description and source-code<pre class="apidocCodePre">getCookieStringSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -7234,11 +7227,11 @@ Returns an array of strings suitable for **Set-Cookie** headers. Accepts the sam
   }
 
   var host = canonicalDomain(context.hostname);
-  var path = context.pathname || &#x27;/&#x27;;
+  var path = context.pathname || '/';
 
   var secure = options.secure;
-  if (secure == null &#x26;&#x26; context.protocol &#x26;&#x26;
-      (context.protocol == &#x27;https:&#x27; || context.protocol == &#x27;wss:&#x27;))
+  if (secure == null &amp;&amp; context.protocol &amp;&amp;
+      (context.protocol == 'https:' || context.protocol == 'wss:'))
   {
     secure = true;
   }
@@ -7254,12 +7247,12 @@ Returns an array of strings suitable for **Set-Cookie** headers. Accepts the sam
   var store = this.store;
 
   function matchingCookie(c) {
-    // &#x22;Either:
-    //   The cookie&#x27;s host-only-flag is true and the canonicalized
-    //   request-host is identical to the cookie&#x27;s domain.
+    // "Either:
+    //   The cookie's host-only-flag is true and the canonicalized
+    //   request-host is identical to the cookie's domain.
     // Or:
-    //   The cookie&#x27;s host-only-flag is false and the canonicalized
-    //   request-host domain-matches the cookie&#x27;s domain.&#x22;
+    //   The cookie's host-only-flag is false and the canonicalized
+    //   request-host domain-matches the cookie's domain."
     if (c.hostOnly) {
       if (c.domain != host) {
         return false;
@@ -7270,26 +7263,26 @@ Returns an array of strings suitable for **Set-Cookie** headers. Accepts the sam
       }
     }
 
-    // &#x22;The request-uri&#x27;s path path-matches the cookie&#x27;s path.&#x22;
-    if (!allPaths &#x26;&#x26; !pathMatch(path, c.path)) {
+    // "The request-uri's path path-matches the cookie's path."
+    if (!allPaths &amp;&amp; !pathMatch(path, c.path)) {
       return false;
     }
 
-    // &#x22;If the cookie&#x27;s secure-only-flag is true, then the request-uri&#x27;s
-    // scheme must denote a &#x22;secure&#x22; protocol&#x22;
-    if (c.secure &#x26;&#x26; !secure) {
+    // "If the cookie's secure-only-flag is true, then the request-uri's
+    // scheme must denote a "secure" protocol"
+    if (c.secure &amp;&amp; !secure) {
       return false;
     }
 
-    // &#x22;If the cookie&#x27;s http-only-flag is true, then exclude the cookie if the
-    // cookie-string is being generated for a &#x22;non-HTTP&#x22; API&#x22;
-    if (c.httpOnly &#x26;&#x26; !http) {
+    // "If the cookie's http-only-flag is true, then exclude the cookie if the
+    // cookie-string is being generated for a "non-HTTP" API"
+    if (c.httpOnly &amp;&amp; !http) {
       return false;
     }
 
     // deferred from S5.3
     // non-RFC: allow retention of expired cookies by choice
-    if (expireCheck &#x26;&#x26; c.expiryTime() &#x3c;= now) {
+    if (expireCheck &amp;&amp; c.expiryTime() &lt;= now) {
       store.removeCookie(c.domain, c.path, c.key, function(){}); // result ignored
       return false;
     }
@@ -7321,20 +7314,20 @@ Returns an array of strings suitable for **Set-Cookie** headers. Accepts the sam
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 var cookie = Cookie.parse(header);
-cookie.value = &#x27;somethingdifferent&#x27;;
+cookie.value = 'somethingdifferent';
 header = cookie.toString();
 
 var cookiejar = new tough.CookieJar();
-cookiejar.setCookie(cookie, &#x27;http://currentdomain.example.com/path&#x27;, cb);
+cookiejar.setCookie(cookie, 'http://currentdomain.example.com/path', cb);
 // ...
-cookiejar.<span class="apidocCodeKeywordSpan">getCookies</span>(&#x27;http://example.com/otherpath&#x27;,function(err,cookies) {
-  res.headers[&#x27;cookie&#x27;] = cookies.join(&#x27;; &#x27;);
+cookiejar.<span class="apidocCodeKeywordSpan">getCookies</span>('http://example.com/otherpath',function(err,cookies) {
+  res.headers['cookie'] = cookies.join('; ');
 });
 ```
 
 # Installation
 
-It&#x27;s _so_ easy!
+It's _so_ easy!
 ...</pre></li>
     </ul>
 
@@ -7354,7 +7347,7 @@ It&#x27;s _so_ easy!
     <ul>
     <li>description and source-code<pre class="apidocCodePre">getCookiesSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -7371,7 +7364,7 @@ It&#x27;s _so_ easy!
   return syncResult;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  * _secure_ - boolean - autodetect from url - indicates if this is a &#x22;Secure&#x22; API.  If the currentUrl starts with `https
+  * _secure_ - boolean - autodetect from url - indicates if this is a "Secure" API.  If the currentUrl starts with `https
 :` or `wss:` then this is defaulted to `true`, otherwise `false`.
   * _now_ - Date - default `new Date()` - what to use for the creation/access time of cookies
   * _expire_ - boolean - default `true` - perform expiry-time checking of cookies and asynchronously remove expired cookies from
@@ -7458,7 +7451,7 @@ Synchronous version of `getSetCookieStrings`; only works with synchronous stores
     <ul>
     <li>description and source-code<pre class="apidocCodePre">getSetCookieStringsSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -7509,16 +7502,16 @@ Serialize the Jar if the underlying store supports `.getAllCookies`.
     <ul>
     <li>description and source-code<pre class="apidocCodePre">serialize = function (cb) {
   var type = this.store.constructor.name;
-  if (type === &#x27;Object&#x27;) {
+  if (type === 'Object') {
     type = null;
   }
 
-  // update README.md &#x22;Serialization Format&#x22; if you change this, please!
+  // update README.md "Serialization Format" if you change this, please!
   var serialized = {
     // The version of tough-cookie that serialized this jar. Generally a good
     // practice since future versions can make data import decisions based on
     // known past behavior. When/if this matters, use `semver`.
-    version: &#x27;tough-cookie@&#x27;+VERSION,
+    version: 'tough-cookie@'+VERSION,
 
     // add the store type, to make humans happy:
     storeType: type,
@@ -7530,10 +7523,10 @@ Serialize the Jar if the underlying store supports `.getAllCookies`.
     cookies: []
   };
 
-  if (!(this.store.getAllCookies &#x26;&#x26;
-        typeof this.store.getAllCookies === &#x27;function&#x27;))
+  if (!(this.store.getAllCookies &amp;&amp;
+        typeof this.store.getAllCookies === 'function'))
   {
-    return cb(new Error(&#x27;store does not support getAllCookies and cannot be serialized&#x27;));
+    return cb(new Error('store does not support getAllCookies and cannot be serialized'));
   }
 
   this.store.getAllCookies(function(err,cookies) {
@@ -7542,7 +7535,7 @@ Serialize the Jar if the underlying store supports `.getAllCookies`.
     }
 
     serialized.cookies = cookies.map(function(cookie) {
-      // convert to serialized &#x27;raw&#x27; cookies
+      // convert to serialized 'raw' cookies
       cookie = (cookie instanceof Cookie) ? cookie.toJSON() : cookie;
 
       // Remove the index so new ones get assigned during deserialization
@@ -7592,7 +7585,7 @@ Any `Date` properties (i.e., `.expires`, `.creation`, and `.lastAccessed`) are e
     <ul>
     <li>description and source-code<pre class="apidocCodePre">serializeSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -7660,7 +7653,7 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
     cookie = Cookie.parse(cookie, { loose: loose });
   }
   if (!cookie) {
-    err = new Error(&#x22;Cookie failed to parse&#x22;);
+    err = new Error("Cookie failed to parse");
     return cb(options.ignoreError ? null : err);
   }
 
@@ -7672,10 +7665,10 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
   // S5.3 step 4: NOOP; domain is null by default
 
   // S5.3 step 5: public suffixes
-  if (this.rejectPublicSuffixes &#x26;&#x26; cookie.domain) {
+  if (this.rejectPublicSuffixes &amp;&amp; cookie.domain) {
     var suffix = pubsuffix.getPublicSuffix(cookie.cdomain());
-    if (suffix == null) { // e.g. &#x22;com&#x22;
-      err = new Error(&#x22;Cookie has domain set to a public suffix&#x22;);
+    if (suffix == null) { // e.g. "com"
+      err = new Error("Cookie has domain set to a public suffix");
       return cb(options.ignoreError ? null : err);
     }
   }
@@ -7683,11 +7676,11 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
   // S5.3 step 6:
   if (cookie.domain) {
     if (!domainMatch(host, cookie.cdomain(), false)) {
-      err = new Error(&#x22;Cookie not in this host&#x27;s domain. Cookie:&#x22;+cookie.cdomain()+&#x22; Request:&#x22;+host);
+      err = new Error("Cookie not in this host's domain. Cookie:"+cookie.cdomain()+" Request:"+host);
       return cb(options.ignoreError ? null : err);
     }
 
-    if (cookie.hostOnly == null) { // don&#x27;t reset if already set
+    if (cookie.hostOnly == null) { // don't reset if already set
       cookie.hostOnly = false;
     }
 
@@ -7697,9 +7690,9 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
   }
 
   //S5.2.4 If the attribute-value is empty or if the first character of the
-  //attribute-value is not %x2F (&#x22;/&#x22;):
+  //attribute-value is not %x2F ("/"):
   //Let cookie-path be the default-path.
-  if (!cookie.path || cookie.path[0] !== &#x27;/&#x27;) {
+  if (!cookie.path || cookie.path[0] !== '/') {
     cookie.path = defaultPath(context.pathname);
     cookie.pathIsDefault = true;
   }
@@ -7708,8 +7701,8 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
   // S5.3 step 9: NOOP; httpOnly attribute
 
   // S5.3 step 10
-  if (options.http === false &#x26;&#x26; cookie.httpOnly) {
-    err = new Error(&#x22;Cookie is HttpOnly and this isn&#x27;t an HTTP API&#x22;);
+  if (options.http === false &amp;&amp; cookie.httpOnly) {
+    err = new Error("Cookie is HttpOnly and this isn't an HTTP API");
     return cb(options.ignoreError ? null : err);
   }
 
@@ -7735,10 +7728,10 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
     };
 
     if (oldCookie) {
-      // S5.3 step 11 - &#x22;If the cookie store contains a cookie with the same name,
-      // domain, and path as the newly created cookie:&#x22;
-      if (options.http === false &#x26;&#x26; oldCookie.httpOnly) { // step 11.2
-        err = new Error(&#x22;old Cookie is HttpOnly and this isn&#x27;t an HTTP API&#x22;);
+      // S5.3 step 11 - "If the cookie store contains a cookie with the same name,
+      // domain, and path as the newly created cookie:"
+      if (options.http === false &amp;&amp; oldCookie.httpOnly) { // step 11.2
+        err = new Error("old Cookie is HttpOnly and this isn't an HTTP API");
         return cb(options.ignoreError ? null : err);
       }
       cookie.creation = oldCookie.creation; // step 11.3
@@ -7756,17 +7749,17 @@ Alias of .serializeSync() for the convenience of `JSON.stringify(cookiejar)`.
   store.findCookie(cookie.domain, cookie.path, cookie.key, withCookie);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-var tough = require(&#x27;tough-cookie&#x27;);
+var tough = require('tough-cookie');
 var Cookie = tough.Cookie;
 var cookie = Cookie.parse(header);
-cookie.value = &#x27;somethingdifferent&#x27;;
+cookie.value = 'somethingdifferent';
 header = cookie.toString();
 
 var cookiejar = new tough.CookieJar();
-cookiejar.<span class="apidocCodeKeywordSpan">setCookie</span>(cookie, &#x27;http://currentdomain.example.com/path&#x27;, cb);
+cookiejar.<span class="apidocCodeKeywordSpan">setCookie</span>(cookie, 'http://currentdomain.example.com/path', cb);
 // ...
-cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cookies) {
-  res.headers[&#x27;cookie&#x27;] = cookies.join(&#x27;; &#x27;);
+cookiejar.getCookies('http://example.com/otherpath',function(err,cookies) {
+  res.headers['cookie'] = cookies.join('; ');
 });
 ```
 
@@ -7790,7 +7783,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     <ul>
     <li>description and source-code<pre class="apidocCodePre">setCookieSync = function () {
   if (!this.store.synchronous) {
-    throw new Error(&#x27;CookieJar store is not synchronous; use async API instead.&#x27;);
+    throw new Error('CookieJar store is not synchronous; use async API instead.');
   }
 
   var args = Array.prototype.slice.call(arguments);
@@ -7808,13 +7801,13 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   * _http_ - boolean - default `true` - indicates if this is an HTTP or non-HTTP API.  Affects HttpOnly cookies.
-  * _secure_ - boolean - autodetect from url - indicates if this is a &#x22;Secure&#x22; API.  If the currentUrl starts with `https
+  * _secure_ - boolean - autodetect from url - indicates if this is a "Secure" API.  If the currentUrl starts with `https
 :` or `wss:` then this is defaulted to `true`, otherwise `false`.
   * _now_ - Date - default `new Date()` - what to use for the creation/access time of cookies
   * _ignoreError_ - boolean - default `false` - silently ignore things like parse errors and invalid domains.  `Store` errors aren
-&#x27;t ignored by this option.
+'t ignored by this option.
 
-As per the RFC, the `.hostOnly` property is set if there was no &#x22;Domain=&#x22; parameter in the cookie string (or `.domain`
+As per the RFC, the `.hostOnly` property is set if there was no "Domain=" parameter in the cookie string (or `.domain`
 was null on the Cookie object).  The `.domain` property is set to the fully-qualified hostname of `currentUrl` in this case.  Matching
  this cookie requires an exact hostname match (not a `domainMatch` as per usual).
 
@@ -7964,7 +7957,7 @@ Callback takes an error and the resulting `Cookie` object.  If no cookie is foun
 
   var pathMatcher;
   if (!path) {
-    // null means &#x22;all paths&#x22;
+    // null means "all paths"
     pathMatcher = function matchAll(domainIndex) {
       for (var curPath in domainIndex) {
         var pathIndex = domainIndex[curPath];
@@ -8020,7 +8013,7 @@ Locates cookies matching the given domain and path.  This is most often called i
 If no cookies are found, the callback MUST be passed an empty array.
 
 The resulting list will be checked for applicability to the current request according to the RFC (domain-match, path-match, http
--only-flag, secure-flag, expiry, etc.), so it&#x27;s OK to use an optimistic search algorithm when implementing this method.  However
+-only-flag, secure-flag, expiry, etc.), so it's OK to use an optimistic search algorithm when implementing this method.  However
 , the search algorithm used SHOULD try to find cookies that `domainMatch()` the domain and `pathMatch()` the path in order to limit
  the amount of checking that needs to be done.
 ...</pre></li>
@@ -8066,7 +8059,7 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
 
 ### `.clone([store,]cb(err,newJar))`
 
-Produces a deep clone of this jar. Modifications to the original won&#x27;t affect the clone, and vice versa.
+Produces a deep clone of this jar. Modifications to the original won't affect the clone, and vice versa.
 
 The `store` argument is optional, but should be an instance of `Store`. By default, a new instance of `MemoryCookieStore` is created
 . Transferring between store types is supported so long as the source implements `.<span class="apidocCodeKeywordSpan">getAllCookies
@@ -8091,17 +8084,17 @@ The `store` argument is optional, but must be a _synchronous_ `Store` instance i
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">inspect = function () {
-  return &#x22;{ idx: &#x22;+util.inspect(this.idx, false, 2)+&#x27; }&#x27;;
+  return "{ idx: "+util.inspect(this.idx, false, 2)+' }';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 MemoryCookieStore.prototype.idx = null;
 
-// Since it&#x27;s just a struct in RAM, this Store is synchronous
+// Since it's just a struct in RAM, this Store is synchronous
 MemoryCookieStore.prototype.synchronous = true;
 
 // force a default depth:
 MemoryCookieStore.prototype.inspect = function() {
-return &#x22;{ idx: &#x22;+util.<span class="apidocCodeKeywordSpan">inspect</span>(this.idx, false, 2)+&#x27; }&#x27;;
+return "{ idx: "+util.<span class="apidocCodeKeywordSpan">inspect</span>(this.idx, false, 2)+' }';
 };
 
 MemoryCookieStore.prototype.findCookie = function(domain, path, key, cb) {
@@ -8137,7 +8130,7 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
 
 ### `.clone([store,]cb(err,newJar))`
 
-Produces a deep clone of this jar. Modifications to the original won&#x27;t affect the clone, and vice versa.
+Produces a deep clone of this jar. Modifications to the original won't affect the clone, and vice versa.
 
 The `store` argument is optional, but should be an instance of `Store`. By default, a new instance of `MemoryCookieStore` is created
 . Transferring between store types is supported so long as the source implements `.getAllCookies()` and the destination implements
@@ -8162,7 +8155,7 @@ The `store` argument is optional, but must be a _synchronous_ `Store` instance i
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">removeCookie = function (domain, path, key, cb) {
-  if (this.idx[domain] &#x26;&#x26; this.idx[domain][path] &#x26;&#x26; this.idx[domain][path][key]) {
+  if (this.idx[domain] &amp;&amp; this.idx[domain][path] &amp;&amp; this.idx[domain][path][key]) {
     delete this.idx[domain][path][key];
   }
   cb(null);
@@ -8170,7 +8163,7 @@ The `store` argument is optional, but must be a _synchronous_ `Store` instance i
     <li>example usage<pre class="apidocCodePre">...
 
 Stores may wish to optimize changing the `.value` of the cookie in the store versus storing a new cookie.  If the implementation
- doesn&#x27;t define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
+ doesn't define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
 
 The `newCookie` and `oldCookie` objects MUST NOT be modified.
 
@@ -8180,7 +8173,7 @@ Pass an error if the newCookie cannot be stored.
 
 Remove a cookie from the store (see notes on `findCookie` about the uniqueness constraint).
 
-The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only pass an error due to the failure to remove an existing
+The implementation MUST NOT pass an error if the cookie doesn't exist; only pass an error due to the failure to remove an existing
  cookie.
 
 ### `store.removeCookies(domain, path, cb(err))`
@@ -8212,7 +8205,7 @@ The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only
 
 Remove a cookie from the store (see notes on `findCookie` about the uniqueness constraint).
 
-The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only pass an error due to the failure to remove an existing
+The implementation MUST NOT pass an error if the cookie doesn't exist; only pass an error due to the failure to remove an existing
  cookie.
 
 ### `store.<span class="apidocCodeKeywordSpan">removeCookies</span>(domain, path, cb(err))`
@@ -8244,7 +8237,7 @@ Pass an error ONLY if removing any existing cookies failed.
     <li>example usage<pre class="apidocCodePre">...
 
 Adds a new cookie to the store.  The implementation SHOULD replace any existing cookie with the same `.domain`, `.path`, and `.key
-` properties -- depending on the nature of the implementation, it&#x27;s possible that between the call to `fetchCookie` and `putCookie
+` properties -- depending on the nature of the implementation, it's possible that between the call to `fetchCookie` and `putCookie
 ` that a duplicate `putCookie` can occur.
 
 The `cookie` object MUST NOT be modified; the caller will have already updated the `.creation` and `.lastAccessed` properties.
@@ -8257,13 +8250,13 @@ Update an existing cookie.  The implementation MUST update the `.value` for a co
 The implementation SHOULD check that the old value in the store is equivalent to `oldCookie` - how the conflict is resolved is up
  to the store.
 
-The `.lastAccessed` property will always be different between the two objects (to the precision possible via JavaScript&#x27;s clock
+The `.lastAccessed` property will always be different between the two objects (to the precision possible via JavaScript's clock
 ).  Both `.creation` and `.creationIndex` are guaranteed to be the same.  Stores MAY ignore or defer the `.lastAccessed` change
 at the cost of affecting how cookies are selected for automatic deletion (e.g., least-recently-used, which is up to the store to
  implement).
 
 Stores may wish to optimize changing the `.value` of the cookie in the store versus storing a new cookie.  If the implementation
- doesn&#x27;t define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
+ doesn't define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
 ...</pre></li>
     </ul>
 
@@ -8335,7 +8328,7 @@ Callback takes an error and the resulting `Cookie` object.  If no cookie is foun
 
   var pathMatcher;
   if (!path) {
-    // null means &#x22;all paths&#x22;
+    // null means "all paths"
     pathMatcher = function matchAll(domainIndex) {
       for (var curPath in domainIndex) {
         var pathIndex = domainIndex[curPath];
@@ -8391,7 +8384,7 @@ Locates cookies matching the given domain and path.  This is most often called i
 If no cookies are found, the callback MUST be passed an empty array.
 
 The resulting list will be checked for applicability to the current request according to the RFC (domain-match, path-match, http
--only-flag, secure-flag, expiry, etc.), so it&#x27;s OK to use an optimistic search algorithm when implementing this method.  However
+-only-flag, secure-flag, expiry, etc.), so it's OK to use an optimistic search algorithm when implementing this method.  However
 , the search algorithm used SHOULD try to find cookies that `domainMatch()` the domain and `pathMatch()` the path in order to limit
  the amount of checking that needs to be done.
 ...</pre></li>
@@ -8442,7 +8435,7 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
 
 ### `.clone([store,]cb(err,newJar))`
 
-Produces a deep clone of this jar. Modifications to the original won&#x27;t affect the clone, and vice versa.
+Produces a deep clone of this jar. Modifications to the original won't affect the clone, and vice versa.
 
 The `store` argument is optional, but should be an instance of `Store`. By default, a new instance of `MemoryCookieStore` is created
 . Transferring between store types is supported so long as the source implements `.<span class="apidocCodeKeywordSpan">getAllCookies
@@ -8472,17 +8465,17 @@ The `store` argument is optional, but must be a _synchronous_ `Store` instance i
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">inspect = function () {
-  return &#x22;{ idx: &#x22;+util.inspect(this.idx, false, 2)+&#x27; }&#x27;;
+  return "{ idx: "+util.inspect(this.idx, false, 2)+' }';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 MemoryCookieStore.prototype.idx = null;
 
-// Since it&#x27;s just a struct in RAM, this Store is synchronous
+// Since it's just a struct in RAM, this Store is synchronous
 MemoryCookieStore.prototype.synchronous = true;
 
 // force a default depth:
 MemoryCookieStore.prototype.inspect = function() {
-return &#x22;{ idx: &#x22;+util.<span class="apidocCodeKeywordSpan">inspect</span>(this.idx, false, 2)+&#x27; }&#x27;;
+return "{ idx: "+util.<span class="apidocCodeKeywordSpan">inspect</span>(this.idx, false, 2)+' }';
 };
 
 MemoryCookieStore.prototype.findCookie = function(domain, path, key, cb) {
@@ -8523,7 +8516,7 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
 
 ### `.clone([store,]cb(err,newJar))`
 
-Produces a deep clone of this jar. Modifications to the original won&#x27;t affect the clone, and vice versa.
+Produces a deep clone of this jar. Modifications to the original won't affect the clone, and vice versa.
 
 The `store` argument is optional, but should be an instance of `Store`. By default, a new instance of `MemoryCookieStore` is created
 . Transferring between store types is supported so long as the source implements `.getAllCookies()` and the destination implements
@@ -8553,7 +8546,7 @@ The `store` argument is optional, but must be a _synchronous_ `Store` instance i
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">removeCookie = function (domain, path, key, cb) {
-  if (this.idx[domain] &#x26;&#x26; this.idx[domain][path] &#x26;&#x26; this.idx[domain][path][key]) {
+  if (this.idx[domain] &amp;&amp; this.idx[domain][path] &amp;&amp; this.idx[domain][path][key]) {
     delete this.idx[domain][path][key];
   }
   cb(null);
@@ -8561,7 +8554,7 @@ The `store` argument is optional, but must be a _synchronous_ `Store` instance i
     <li>example usage<pre class="apidocCodePre">...
 
 Stores may wish to optimize changing the `.value` of the cookie in the store versus storing a new cookie.  If the implementation
- doesn&#x27;t define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
+ doesn't define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
 
 The `newCookie` and `oldCookie` objects MUST NOT be modified.
 
@@ -8571,7 +8564,7 @@ Pass an error if the newCookie cannot be stored.
 
 Remove a cookie from the store (see notes on `findCookie` about the uniqueness constraint).
 
-The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only pass an error due to the failure to remove an existing
+The implementation MUST NOT pass an error if the cookie doesn't exist; only pass an error due to the failure to remove an existing
  cookie.
 
 ### `store.removeCookies(domain, path, cb(err))`
@@ -8608,7 +8601,7 @@ The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only
 
 Remove a cookie from the store (see notes on `findCookie` about the uniqueness constraint).
 
-The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only pass an error due to the failure to remove an existing
+The implementation MUST NOT pass an error if the cookie doesn't exist; only pass an error due to the failure to remove an existing
  cookie.
 
 ### `store.<span class="apidocCodeKeywordSpan">removeCookies</span>(domain, path, cb(err))`
@@ -8645,7 +8638,7 @@ Pass an error ONLY if removing any existing cookies failed.
     <li>example usage<pre class="apidocCodePre">...
 
 Adds a new cookie to the store.  The implementation SHOULD replace any existing cookie with the same `.domain`, `.path`, and `.key
-` properties -- depending on the nature of the implementation, it&#x27;s possible that between the call to `fetchCookie` and `putCookie
+` properties -- depending on the nature of the implementation, it's possible that between the call to `fetchCookie` and `putCookie
 ` that a duplicate `putCookie` can occur.
 
 The `cookie` object MUST NOT be modified; the caller will have already updated the `.creation` and `.lastAccessed` properties.
@@ -8658,13 +8651,13 @@ Update an existing cookie.  The implementation MUST update the `.value` for a co
 The implementation SHOULD check that the old value in the store is equivalent to `oldCookie` - how the conflict is resolved is up
  to the store.
 
-The `.lastAccessed` property will always be different between the two objects (to the precision possible via JavaScript&#x27;s clock
+The `.lastAccessed` property will always be different between the two objects (to the precision possible via JavaScript's clock
 ).  Both `.creation` and `.creationIndex` are guaranteed to be the same.  Stores MAY ignore or defer the `.lastAccessed` change
 at the cost of affecting how cookies are selected for automatic deletion (e.g., least-recently-used, which is up to the store to
  implement).
 
 Stores may wish to optimize changing the `.value` of the cookie in the store versus storing a new cookie.  If the implementation
- doesn&#x27;t define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
+ doesn't define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
 ...</pre></li>
     </ul>
 
@@ -8704,7 +8697,7 @@ Stores may wish to optimize changing the `.value` of the cookie in the store ver
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">findCookie = function (domain, path, key, cb) {
-  throw new Error(&#x27;findCookie is not implemented&#x27;);
+  throw new Error('findCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -8737,7 +8730,7 @@ Callback takes an error and the resulting `Cookie` object.  If no cookie is foun
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">findCookies = function (domain, path, cb) {
-  throw new Error(&#x27;findCookies is not implemented&#x27;);
+  throw new Error('findCookies is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -8756,7 +8749,7 @@ Locates cookies matching the given domain and path.  This is most often called i
 If no cookies are found, the callback MUST be passed an empty array.
 
 The resulting list will be checked for applicability to the current request according to the RFC (domain-match, path-match, http
--only-flag, secure-flag, expiry, etc.), so it&#x27;s OK to use an optimistic search algorithm when implementing this method.  However
+-only-flag, secure-flag, expiry, etc.), so it's OK to use an optimistic search algorithm when implementing this method.  However
 , the search algorithm used SHOULD try to find cookies that `domainMatch()` the domain and `pathMatch()` the path in order to limit
  the amount of checking that needs to be done.
 ...</pre></li>
@@ -8772,7 +8765,7 @@ The resulting list will be checked for applicability to the current request acco
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">getAllCookies = function (cb) {
-  throw new Error(&#x27;getAllCookies is not implemented (therefore jar cannot be serialized)&#x27;);
+  throw new Error('getAllCookies is not implemented (therefore jar cannot be serialized)');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -8780,7 +8773,7 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
 
 ### `.clone([store,]cb(err,newJar))`
 
-Produces a deep clone of this jar. Modifications to the original won&#x27;t affect the clone, and vice versa.
+Produces a deep clone of this jar. Modifications to the original won't affect the clone, and vice versa.
 
 The `store` argument is optional, but should be an instance of `Store`. By default, a new instance of `MemoryCookieStore` is created
 . Transferring between store types is supported so long as the source implements `.<span class="apidocCodeKeywordSpan">getAllCookies
@@ -8805,7 +8798,7 @@ The `store` argument is optional, but must be a _synchronous_ `Store` instance i
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">putCookie = function (cookie, cb) {
-  throw new Error(&#x27;putCookie is not implemented&#x27;);
+  throw new Error('putCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -8813,7 +8806,7 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
 
 ### `.clone([store,]cb(err,newJar))`
 
-Produces a deep clone of this jar. Modifications to the original won&#x27;t affect the clone, and vice versa.
+Produces a deep clone of this jar. Modifications to the original won't affect the clone, and vice versa.
 
 The `store` argument is optional, but should be an instance of `Store`. By default, a new instance of `MemoryCookieStore` is created
 . Transferring between store types is supported so long as the source implements `.getAllCookies()` and the destination implements
@@ -8838,12 +8831,12 @@ The `store` argument is optional, but must be a _synchronous_ `Store` instance i
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">removeCookie = function (domain, path, key, cb) {
-  throw new Error(&#x27;removeCookie is not implemented&#x27;);
+  throw new Error('removeCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
 Stores may wish to optimize changing the `.value` of the cookie in the store versus storing a new cookie.  If the implementation
- doesn&#x27;t define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
+ doesn't define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
 
 The `newCookie` and `oldCookie` objects MUST NOT be modified.
 
@@ -8853,7 +8846,7 @@ Pass an error if the newCookie cannot be stored.
 
 Remove a cookie from the store (see notes on `findCookie` about the uniqueness constraint).
 
-The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only pass an error due to the failure to remove an existing
+The implementation MUST NOT pass an error if the cookie doesn't exist; only pass an error due to the failure to remove an existing
  cookie.
 
 ### `store.removeCookies(domain, path, cb(err))`
@@ -8870,7 +8863,7 @@ The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">removeCookies = function (domain, path, cb) {
-  throw new Error(&#x27;removeCookies is not implemented&#x27;);
+  throw new Error('removeCookies is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -8878,7 +8871,7 @@ The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only
 
 Remove a cookie from the store (see notes on `findCookie` about the uniqueness constraint).
 
-The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only pass an error due to the failure to remove an existing
+The implementation MUST NOT pass an error if the cookie doesn't exist; only pass an error due to the failure to remove an existing
  cookie.
 
 ### `store.<span class="apidocCodeKeywordSpan">removeCookies</span>(domain, path, cb(err))`
@@ -8904,12 +8897,12 @@ Pass an error ONLY if removing any existing cookies failed.
     <li>description and source-code<pre class="apidocCodePre">updateCookie = function (oldCookie, newCookie, cb) {
   // recommended default implementation:
   // return this.putCookie(newCookie, cb);
-  throw new Error(&#x27;updateCookie is not implemented&#x27;);
+  throw new Error('updateCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
 Adds a new cookie to the store.  The implementation SHOULD replace any existing cookie with the same `.domain`, `.path`, and `.key
-` properties -- depending on the nature of the implementation, it&#x27;s possible that between the call to `fetchCookie` and `putCookie
+` properties -- depending on the nature of the implementation, it's possible that between the call to `fetchCookie` and `putCookie
 ` that a duplicate `putCookie` can occur.
 
 The `cookie` object MUST NOT be modified; the caller will have already updated the `.creation` and `.lastAccessed` properties.
@@ -8922,13 +8915,13 @@ Update an existing cookie.  The implementation MUST update the `.value` for a co
 The implementation SHOULD check that the old value in the store is equivalent to `oldCookie` - how the conflict is resolved is up
  to the store.
 
-The `.lastAccessed` property will always be different between the two objects (to the precision possible via JavaScript&#x27;s clock
+The `.lastAccessed` property will always be different between the two objects (to the precision possible via JavaScript's clock
 ).  Both `.creation` and `.creationIndex` are guaranteed to be the same.  Stores MAY ignore or defer the `.lastAccessed` change
 at the cost of affecting how cookies are selected for automatic deletion (e.g., least-recently-used, which is up to the store to
  implement).
 
 Stores may wish to optimize changing the `.value` of the cookie in the store versus storing a new cookie.  If the implementation
- doesn&#x27;t define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
+ doesn't define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
 ...</pre></li>
     </ul>
 
@@ -8947,7 +8940,7 @@ Stores may wish to optimize changing the `.value` of the cookie in the store ver
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">findCookie = function (domain, path, key, cb) {
-  throw new Error(&#x27;findCookie is not implemented&#x27;);
+  throw new Error('findCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -8985,7 +8978,7 @@ Callback takes an error and the resulting `Cookie` object.  If no cookie is foun
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">findCookies = function (domain, path, cb) {
-  throw new Error(&#x27;findCookies is not implemented&#x27;);
+  throw new Error('findCookies is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -9004,7 +8997,7 @@ Locates cookies matching the given domain and path.  This is most often called i
 If no cookies are found, the callback MUST be passed an empty array.
 
 The resulting list will be checked for applicability to the current request according to the RFC (domain-match, path-match, http
--only-flag, secure-flag, expiry, etc.), so it&#x27;s OK to use an optimistic search algorithm when implementing this method.  However
+-only-flag, secure-flag, expiry, etc.), so it's OK to use an optimistic search algorithm when implementing this method.  However
 , the search algorithm used SHOULD try to find cookies that `domainMatch()` the domain and `pathMatch()` the path in order to limit
  the amount of checking that needs to be done.
 ...</pre></li>
@@ -9025,7 +9018,7 @@ The resulting list will be checked for applicability to the current request acco
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">getAllCookies = function (cb) {
-  throw new Error(&#x27;getAllCookies is not implemented (therefore jar cannot be serialized)&#x27;);
+  throw new Error('getAllCookies is not implemented (therefore jar cannot be serialized)');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -9033,7 +9026,7 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
 
 ### `.clone([store,]cb(err,newJar))`
 
-Produces a deep clone of this jar. Modifications to the original won&#x27;t affect the clone, and vice versa.
+Produces a deep clone of this jar. Modifications to the original won't affect the clone, and vice versa.
 
 The `store` argument is optional, but should be an instance of `Store`. By default, a new instance of `MemoryCookieStore` is created
 . Transferring between store types is supported so long as the source implements `.<span class="apidocCodeKeywordSpan">getAllCookies
@@ -9063,7 +9056,7 @@ The `store` argument is optional, but must be a _synchronous_ `Store` instance i
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">putCookie = function (cookie, cb) {
-  throw new Error(&#x27;putCookie is not implemented&#x27;);
+  throw new Error('putCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -9071,7 +9064,7 @@ Alias of `.deserializeSync` to provide consistency with `Cookie.fromJSON()`.
 
 ### `.clone([store,]cb(err,newJar))`
 
-Produces a deep clone of this jar. Modifications to the original won&#x27;t affect the clone, and vice versa.
+Produces a deep clone of this jar. Modifications to the original won't affect the clone, and vice versa.
 
 The `store` argument is optional, but should be an instance of `Store`. By default, a new instance of `MemoryCookieStore` is created
 . Transferring between store types is supported so long as the source implements `.getAllCookies()` and the destination implements
@@ -9101,12 +9094,12 @@ The `store` argument is optional, but must be a _synchronous_ `Store` instance i
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">removeCookie = function (domain, path, key, cb) {
-  throw new Error(&#x27;removeCookie is not implemented&#x27;);
+  throw new Error('removeCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
 Stores may wish to optimize changing the `.value` of the cookie in the store versus storing a new cookie.  If the implementation
- doesn&#x27;t define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
+ doesn't define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
 
 The `newCookie` and `oldCookie` objects MUST NOT be modified.
 
@@ -9116,7 +9109,7 @@ Pass an error if the newCookie cannot be stored.
 
 Remove a cookie from the store (see notes on `findCookie` about the uniqueness constraint).
 
-The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only pass an error due to the failure to remove an existing
+The implementation MUST NOT pass an error if the cookie doesn't exist; only pass an error due to the failure to remove an existing
  cookie.
 
 ### `store.removeCookies(domain, path, cb(err))`
@@ -9138,7 +9131,7 @@ The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">removeCookies = function (domain, path, cb) {
-  throw new Error(&#x27;removeCookies is not implemented&#x27;);
+  throw new Error('removeCookies is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -9146,7 +9139,7 @@ The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only
 
 Remove a cookie from the store (see notes on `findCookie` about the uniqueness constraint).
 
-The implementation MUST NOT pass an error if the cookie doesn&#x27;t exist; only pass an error due to the failure to remove an existing
+The implementation MUST NOT pass an error if the cookie doesn't exist; only pass an error due to the failure to remove an existing
  cookie.
 
 ### `store.<span class="apidocCodeKeywordSpan">removeCookies</span>(domain, path, cb(err))`
@@ -9177,12 +9170,12 @@ Pass an error ONLY if removing any existing cookies failed.
     <li>description and source-code<pre class="apidocCodePre">updateCookie = function (oldCookie, newCookie, cb) {
   // recommended default implementation:
   // return this.putCookie(newCookie, cb);
-  throw new Error(&#x27;updateCookie is not implemented&#x27;);
+  throw new Error('updateCookie is not implemented');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
 Adds a new cookie to the store.  The implementation SHOULD replace any existing cookie with the same `.domain`, `.path`, and `.key
-` properties -- depending on the nature of the implementation, it&#x27;s possible that between the call to `fetchCookie` and `putCookie
+` properties -- depending on the nature of the implementation, it's possible that between the call to `fetchCookie` and `putCookie
 ` that a duplicate `putCookie` can occur.
 
 The `cookie` object MUST NOT be modified; the caller will have already updated the `.creation` and `.lastAccessed` properties.
@@ -9195,13 +9188,13 @@ Update an existing cookie.  The implementation MUST update the `.value` for a co
 The implementation SHOULD check that the old value in the store is equivalent to `oldCookie` - how the conflict is resolved is up
  to the store.
 
-The `.lastAccessed` property will always be different between the two objects (to the precision possible via JavaScript&#x27;s clock
+The `.lastAccessed` property will always be different between the two objects (to the precision possible via JavaScript's clock
 ).  Both `.creation` and `.creationIndex` are guaranteed to be the same.  Stores MAY ignore or defer the `.lastAccessed` change
 at the cost of affecting how cookies are selected for automatic deletion (e.g., least-recently-used, which is up to the store to
  implement).
 
 Stores may wish to optimize changing the `.value` of the cookie in the store versus storing a new cookie.  If the implementation
- doesn&#x27;t define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
+ doesn't define this method a stub that calls `putCookie(newCookie,cb)` will be added to the store object.
 ...</pre></li>
     </ul>
 
@@ -9223,10 +9216,10 @@ Stores may wish to optimize changing the `.value` of the cookie in the store ver
   if (str == null) {
     return null;
   }
-  str = str.trim().replace(/^\./,&#x27;&#x27;); // S4.1.2.3 &#x26; S5.2.3: ignore leading .
+  str = str.trim().replace(/^\./,''); // S4.1.2.3 &amp; S5.2.3: ignore leading .
 
   // convert to IDN if any non-ASCII characters
-  if (punycode &#x26;&#x26; /[^\u0001-\u007f]/.test(str)) {
+  if (punycode &amp;&amp; /[^\u0001-\u007f]/.test(str)) {
     str = punycode.toASCII(str);
   }
 
@@ -9268,7 +9261,7 @@ Stores may wish to optimize changing the `.value` of the cookie in the store ver
     return cmp;
   }
 
-  // break ties for the same millisecond (precision of JavaScript&#x27;s clock)
+  // break ties for the same millisecond (precision of JavaScript's clock)
   cmp = a.creationIndex - b.creationIndex;
 
   return cmp;
@@ -9291,25 +9284,25 @@ Stores may wish to optimize changing the `.value` of the cookie in the store ver
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function defaultPath(path) {
-  // &#x22;2. If the uri-path is empty or if the first character of the uri-path is not
-  // a %x2F (&#x22;/&#x22;) character, output %x2F (&#x22;/&#x22;) and skip the remaining steps.
-  if (!path || path.substr(0,1) !== &#x22;/&#x22;) {
-    return &#x22;/&#x22;;
+  // "2. If the uri-path is empty or if the first character of the uri-path is not
+  // a %x2F ("/") character, output %x2F ("/") and skip the remaining steps.
+  if (!path || path.substr(0,1) !== "/") {
+    return "/";
   }
 
-  // &#x22;3. If the uri-path contains no more than one %x2F (&#x22;/&#x22;) character, output
-  // %x2F (&#x22;/&#x22;) and skip the remaining step.&#x22;
-  if (path === &#x22;/&#x22;) {
+  // "3. If the uri-path contains no more than one %x2F ("/") character, output
+  // %x2F ("/") and skip the remaining step."
+  if (path === "/") {
     return path;
   }
 
-  var rightSlash = path.lastIndexOf(&#x22;/&#x22;);
+  var rightSlash = path.lastIndexOf("/");
   if (rightSlash === 0) {
-    return &#x22;/&#x22;;
+    return "/";
   }
 
-  // &#x22;4. Output the characters of the uri-path from the first character up to,
-  // but not including, the right-most %x2F (&#x22;/&#x22;).&#x22;
+  // "4. Output the characters of the uri-path from the first character up to,
+  // but not including, the right-most %x2F ("/")."
   return path.slice(0, rightSlash);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -9339,36 +9332,36 @@ Stores may wish to optimize changing the `.value` of the cookie in the store ver
   }
 
 <span class="apidocCodeCommentSpan">  /*
-   * &#x22;The domain string and the string are identical. (Note that both the
+   * "The domain string and the string are identical. (Note that both the
    * domain string and the string will have been canonicalized to lower case at
-   * this point)&#x22;
+   * this point)"
    */
 </span>  if (str == domStr) {
     return true;
   }
 
-  /* &#x22;All of the following [three] conditions hold:&#x22; (order adjusted from the RFC) */
+  /* "All of the following [three] conditions hold:" (order adjusted from the RFC) */
 
-  /* &#x22;* The string is a host name (i.e., not an IP address).&#x22; */
+  /* "* The string is a host name (i.e., not an IP address)." */
   if (net.isIP(str)) {
     return false;
   }
 
-  /* &#x22;* The domain string is a suffix of the string&#x22; */
+  /* "* The domain string is a suffix of the string" */
   var idx = str.indexOf(domStr);
-  if (idx &#x3c;= 0) {
-    return false; // it&#x27;s a non-match (-1) or prefix (0)
+  if (idx &lt;= 0) {
+    return false; // it's a non-match (-1) or prefix (0)
   }
 
-  // e.g &#x22;a.b.c&#x22;.indexOf(&#x22;b.c&#x22;) === 2
+  // e.g "a.b.c".indexOf("b.c") === 2
   // 5 === 3+2
-  if (str.length !== domStr.length + idx) { // it&#x27;s not a suffix
+  if (str.length !== domStr.length + idx) { // it's not a suffix
     return false;
   }
 
-  /* &#x22;* The last character of the string that is not included in the domain
-  * string is a %x2E (&#x22;.&#x22;) character.&#x22; */
-  if (str.substr(idx-1,1) !== &#x27;.&#x27;) {
+  /* "* The last character of the string that is not included in the domain
+  * string is a %x2E (".") character." */
+  if (str.substr(idx-1,1) !== '.') {
     return false;
   }
 
@@ -9392,13 +9385,13 @@ Stores may wish to optimize changing the `.value` of the cookie in the store ver
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function formatDate(date) {
-  var d = date.getUTCDate(); d = d &#x3e;= 10 ? d : &#x27;0&#x27;+d;
-  var h = date.getUTCHours(); h = h &#x3e;= 10 ? h : &#x27;0&#x27;+h;
-  var m = date.getUTCMinutes(); m = m &#x3e;= 10 ? m : &#x27;0&#x27;+m;
-  var s = date.getUTCSeconds(); s = s &#x3e;= 10 ? s : &#x27;0&#x27;+s;
-  return NUM_TO_DAY[date.getUTCDay()] + &#x27;, &#x27; +
-    d+&#x27; &#x27;+ NUM_TO_MONTH[date.getUTCMonth()] +&#x27; &#x27;+ date.getUTCFullYear() +&#x27; &#x27;+
-    h+&#x27;:&#x27;+m+&#x27;:&#x27;+s+&#x27; GMT&#x27;;
+  var d = date.getUTCDate(); d = d &gt;= 10 ? d : '0'+d;
+  var h = date.getUTCHours(); h = h &gt;= 10 ? h : '0'+h;
+  var m = date.getUTCMinutes(); m = m &gt;= 10 ? m : '0'+m;
+  var s = date.getUTCSeconds(); s = s &gt;= 10 ? s : '0'+s;
+  return NUM_TO_DAY[date.getUTCDay()] + ', ' +
+    d+' '+ NUM_TO_MONTH[date.getUTCMonth()] +' '+ date.getUTCFullYear() +' '+
+    h+':'+m+':'+s+' GMT';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -9423,18 +9416,18 @@ Stores may wish to optimize changing the `.value` of the cookie in the store ver
   }
 
   var obj;
-  if (typeof str === &#x27;string&#x27;) {
+  if (typeof str === 'string') {
     obj = jsonParse(str);
     if (obj instanceof Error) {
       return null;
     }
   } else {
-    // assume it&#x27;s an Object
+    // assume it's an Object
     obj = str;
   }
 
   var c = new Cookie();
-  for (var i=0; i&#x3c;Cookie.serializableProperties.length; i++) {
+  for (var i=0; i&lt;Cookie.serializableProperties.length; i++) {
     var prop = Cookie.serializableProperties[i];
     if (obj[prop] === undefined ||
         obj[prop] === Cookie.prototype[prop])
@@ -9442,15 +9435,15 @@ Stores may wish to optimize changing the `.value` of the cookie in the store ver
       continue; // leave as prototype default
     }
 
-    if (prop === &#x27;expires&#x27; ||
-        prop === &#x27;creation&#x27; ||
-        prop === &#x27;lastAccessed&#x27;)
+    if (prop === 'expires' ||
+        prop === 'creation' ||
+        prop === 'lastAccessed')
     {
       if (obj[prop] === null) {
         c[prop] = null;
       } else {
-        c[prop] = obj[prop] == &#x22;Infinity&#x22; ?
-          &#x22;Infinity&#x22; : new Date(obj[prop]);
+        c[prop] = obj[prop] == "Infinity" ?
+          "Infinity" : new Date(obj[prop]);
       }
     } else {
       c[prop] = obj[prop];
@@ -9511,7 +9504,7 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
    * be used to endorse or promote products derived from this software without
    * specific prior written permission.
    *
-   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &#x22;AS IS&#x22;
+   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
    * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
    * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
    * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
@@ -9540,13 +9533,13 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
   }
 
   domain = domain.toLowerCase();
-  var parts = domain.split(&#x27;.&#x27;).reverse();
+  var parts = domain.split('.').reverse();
 
-  var suffix = &#x27;&#x27;;
+  var suffix = '';
   var suffixLen = 0;
-  for (var i=0; i&#x3c;parts.length; i++) {
+  for (var i=0; i&lt;parts.length; i++) {
     var part = parts[i];
-    var starstr = &#x27;*&#x27;+suffix;
+    var starstr = '*'+suffix;
     var partstr = part+suffix;
 
     if (index[starstr]) { // star rule matches
@@ -9558,16 +9551,16 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
       suffixLen = i+1;
     }
 
-    suffix = &#x27;.&#x27;+partstr;
+    suffix = '.'+partstr;
   }
 
-  if (index[&#x27;*&#x27;+suffix]) { // *.domain exists (e.g. *.kyoto.jp for domain=&#x27;kyoto.jp&#x27;);
+  if (index['*'+suffix]) { // *.domain exists (e.g. *.kyoto.jp for domain='kyoto.jp');
     return null;
   }
 
   suffixLen = suffixLen || 1;
-  if (parts.length &#x3e; suffixLen) {
-    var publicSuffix = parts.slice(0,suffixLen+1).reverse().join(&#x27;.&#x27;);
+  if (parts.length &gt; suffixLen) {
+    var publicSuffix = parts.slice(0,suffixLen+1).reverse().join('.');
     return converted ? punycode.toUnicode(publicSuffix) : publicSuffix;
   }
 
@@ -9575,8 +9568,8 @@ For example: `www.example.com` and `www.subdomain.example.com` both have public 
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
  */
-&#x22;use strict&#x22;;
-var pubsuffix = require(&#x27;./pubsuffix&#x27;);
+"use strict";
+var pubsuffix = require('./pubsuffix');
 
 // Gives the permutation of all possible domainMatch()es of a given domain. The
 // array is in shortest-to-longest order.  Handy for indexing.
@@ -9627,17 +9620,17 @@ if (pubSuf == domain) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function parse(str, options) {
-  if (!options || typeof options !== &#x27;object&#x27;) {
+  if (!options || typeof options !== 'object') {
     options = {};
   }
   str = str.trim();
 
-  // We use a regex to parse the &#x22;name-value-pair&#x22; part of S5.2
-  var firstSemi = str.indexOf(&#x27;;&#x27;); // S5.2 step 1
+  // We use a regex to parse the "name-value-pair" part of S5.2
+  var firstSemi = str.indexOf(';'); // S5.2 step 1
   var pairRe = options.loose ? LOOSE_COOKIE_PAIR : COOKIE_PAIR;
   var result = pairRe.exec(firstSemi === -1 ? str : str.substr(0,firstSemi));
 
-  // Rx satisfies the &#x22;the name string is empty&#x22; and &#x22;lacks a %x3D (&#x22;=&#x22;)&#x22;
+  // Rx satisfies the "the name string is empty" and "lacks a %x3D ("=")"
   // constraints as well as trimming any whitespace.
   if (!result) {
     return;
@@ -9647,7 +9640,7 @@ if (pubSuf == domain) {
   if (result[1]) {
     c.key = result[2].trim();
   } else {
-    c.key = &#x27;&#x27;;
+    c.key = '';
   }
   c.value = result[3].trim();
   if (CONTROL_CHARS.test(c.key) || CONTROL_CHARS.test(c.value)) {
@@ -9658,32 +9651,32 @@ if (pubSuf == domain) {
     return c;
   }
 
-  // S5.2.3 &#x22;unparsed-attributes consist of the remainder of the set-cookie-string
-  // (including the %x3B (&#x22;;&#x22;) in question).&#x22; plus later on in the same section
-  // &#x22;discard the first &#x22;;&#x22; and trim&#x22;.
+  // S5.2.3 "unparsed-attributes consist of the remainder of the set-cookie-string
+  // (including the %x3B (";") in question)." plus later on in the same section
+  // "discard the first ";" and trim".
   var unparsed = str.slice(firstSemi + 1).trim();
 
-  // &#x22;If the unparsed-attributes string is empty, skip the rest of these
-  // steps.&#x22;
+  // "If the unparsed-attributes string is empty, skip the rest of these
+  // steps."
   if (unparsed.length === 0) {
     return c;
   }
 
 <span class="apidocCodeCommentSpan">  /*
-   * S5.2 says that when looping over the items &#x22;[p]rocess the attribute-name
+   * S5.2 says that when looping over the items "[p]rocess the attribute-name
    * and attribute-value according to the requirements in the following
-   * subsections&#x22; for every item.  Plus, for many of the individual attributes
-   * in S5.3 it says to use the &#x22;attribute-value of the last attribute in the
-   * cookie-attribute-list&#x22;.  Therefore, in this implementation, we overwrite
+   * subsections" for every item.  Plus, for many of the individual attributes
+   * in S5.3 it says to use the "attribute-value of the last attribute in the
+   * cookie-attribute-list".  Therefore, in this implementation, we overwrite
    * the previous value.
    */
-</span>  var cookie_avs = unparsed.split(&#x27;;&#x27;);
+</span>  var cookie_avs = unparsed.split(';');
   while (cookie_avs.length) {
     var av = cookie_avs.shift().trim();
-    if (av.length === 0) { // happens if &#x22;;;&#x22; appears
+    if (av.length === 0) { // happens if ";;" appears
       continue;
     }
-    var av_sep = av.indexOf(&#x27;=&#x27;);
+    var av_sep = av.indexOf('=');
     var av_key, av_value;
 
     if (av_sep === -1) {
@@ -9701,59 +9694,59 @@ if (pubSuf == domain) {
     }
 
     switch(av_key) {
-    case &#x27;expires&#x27;: // S5.2.1
+    case 'expires': // S5.2.1
       if (av_value) {
         var exp = parseDate(av_value);
-        // &#x22;If the attribute-value failed to parse as a cookie date, ignore the
-        // cookie-av.&#x22;
+        // "If the attribute-value failed to parse as a cookie date, ignore the
+        // cookie-av."
         if (exp) {
-          // over and underflow not realistically a concern: V8&#x27;s getTime() seems to
+          // over and underflow not realistically a concern: V8's getTime() seems to
           // store something larger than a 32-bit time_t (even with 32-bit node)
           c.expires = exp;
         }
       }
       break;
 
-    case &#x27;max-age&#x27;: // S5.2.2
+    case 'max-age': // S5.2.2
       if (av_value) {
-        // &#x22;If the first character of the attribute-value is not a DIGIT or a &#x22;-&#x22;
+        // "If the first character of the attribute-value is not a DIGIT or a "-"
         // character ...[or]... If the remainder of attribute-value contains a
-        // non-DIGIT character, ignore the cookie-av.&#x22;
+        // non-DIGIT character, ignore the cookie-av."
         if (/^-?[0-9]+$/.test(av_value)) {
           var delta = parseInt(av_value, 10);
-          // &#x22;If delta-seconds is less than or equal to zero (0), let expiry-time
-          // be the earliest representable date and time.&#x22;
+          // "If delta-seconds is less than or equal to zero (0), let expiry-time
+          // be the earliest representable date and time."
           c.setMaxAge(delta);
         }
       }
       break;
 
-    case &#x27;domain&#x27;: // S5.2.3
-      // &#x22;If the attribute-value is empty, the behavior is undefined.  However,
-      // the user agent SHOULD ignore the cookie-av entirely.&#x22;
+    case 'domain': // S5.2.3
+      // "If the attribute-value is empty, the behavior is undefined.  However,
+      // the user agent SHOULD ignore the cookie-av entirely."
       if (av_value) {
-        // S5.2.3 &#x22;Let cookie-domain be the attribute-value without the leading %x2E
-        // (&#x22;.&#x22;) character.&#x22;
-        var domain = av_value.trim().replace(/^\./, &#x27;&#x27;);
+        // S5.2.3 "Let cookie-domain be the attribute-value without the leading %x2E
+        // (".") character."
+        var domain = av_value.trim().replace(/^\./, '');
         if (domain) {
-          // &#x22;Convert the cookie-domain to lower case.&#x22;
+          // "Convert the cookie-domain to lower case."
           c.domain = domain.toLowerCase();
         }
       }
       break;
 
-    case &#x27;path&#x27;: // S5.2.4
+    case 'path': // S5.2.4
       /*
-       * &#x22;If the attribute-value is empty or if the first character of the
-       * attribute-value is not %x2F (&#x22;/&#x22;):
+       * "If the attribute-value is empty or if the first character of the
+       * attribute-value is not %x2F ("/"):
        *   Let cookie-path be the default-path.
        * Otherwise:
-       *   Let cookie-path be the attribute-value.&#x22;
+       *   Let cookie-path be the attribute-value."
        *
-       * We&#x27;ll represent the default-path as null since it depends on the
+       * We'll represent the default-path as null since it depends on the
        * context of the parsing.
        */
-      c.path = av_value &#x26;&#x26; av_va ...</pre></li>
+      c.path = av_value &amp;&amp; av_va ...</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 [![Build Status](https://travis-ci.org/salesforce/tough-cookie.png?branch=master)](https://travis-ci.org/salesforce/tough-cookie
 )
@@ -9761,16 +9754,16 @@ if (pubSuf == domain) {
 # Synopsis
 
 ``` javascript
-var tough = require(&#x27;tough-cookie&#x27;);
+var tough = require('tough-cookie');
 var Cookie = tough.Cookie;
 var cookie = Cookie.<span class="apidocCodeKeywordSpan">parse</span>(header);
-cookie.value = &#x27;somethingdifferent&#x27;;
+cookie.value = 'somethingdifferent';
 header = cookie.toString();
 
 var cookiejar = new tough.CookieJar();
-cookiejar.setCookie(cookie, &#x27;http://currentdomain.example.com/path&#x27;, cb);
+cookiejar.setCookie(cookie, 'http://currentdomain.example.com/path', cb);
 // ...
-cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cookies) {
+cookiejar.getCookies('http://example.com/otherpath',function(err,cookies) {
 ...</pre></li>
     </ul>
 
@@ -9809,7 +9802,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   var month = null;
   var year = null;
 
-  for (var i=0; i&#x3c;tokens.length; i++) {
+  for (var i=0; i&lt;tokens.length; i++) {
     var token = tokens[i].trim();
     if (!token.length) {
       continue;
@@ -9835,7 +9828,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
          * *  the minute-value is greater than 59, or
          * *  the second-value is greater than 59.
          */
-        if(hour &#x3e; 23 || minutes &#x3e; 59 || seconds &#x3e; 59) {
+        if(hour &gt; 23 || minutes &gt; 59 || seconds &gt; 59) {
           return;
         }
 
@@ -9855,7 +9848,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
         /* RFC6265 S5.1.1.5:
          * [fail if] the day-of-month-value is less than 1 or greater than 31
          */
-        if(day &#x3c; 1 || day &#x3e; 31) {
+        if(day &lt; 1 || day &gt; 31) {
           return;
         }
         continue;
@@ -9890,13 +9883,13 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
          * 4.  If the year-value is greater than or equal to 0 and less
          * than or equal to 69, increment the year-value by 2000.
          */
-        if (70 &#x3c;= year &#x26;&#x26; year &#x3c;= 99) {
+        if (70 &lt;= year &amp;&amp; year &lt;= 99) {
           year += 1900;
-        } else if (0 &#x3c;= year &#x26;&#x26; year &#x3c;= 69) {
+        } else if (0 &lt;= year &amp;&amp; year &lt;= 69) {
           year += 2000;
         }
 
-        if (year &#x3c; 1601) {
+        if (year &lt; 1601) {
           return; // 5. ... the year-value is less than 1601
         }
       }
@@ -9928,23 +9921,23 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function pathMatch(reqPath, cookiePath) {
-  // &#x22;o  The cookie-path and the request-path are identical.&#x22;
+  // "o  The cookie-path and the request-path are identical."
   if (cookiePath === reqPath) {
     return true;
   }
 
   var idx = reqPath.indexOf(cookiePath);
   if (idx === 0) {
-    // &#x22;o  The cookie-path is a prefix of the request-path, and the last
-    // character of the cookie-path is %x2F (&#x22;/&#x22;).&#x22;
-    if (cookiePath.substr(-1) === &#x22;/&#x22;) {
+    // "o  The cookie-path is a prefix of the request-path, and the last
+    // character of the cookie-path is %x2F ("/")."
+    if (cookiePath.substr(-1) === "/") {
       return true;
     }
 
-    // &#x22; o  The cookie-path is a prefix of the request-path, and the first
+    // " o  The cookie-path is a prefix of the request-path, and the first
     // character of the request-path that is not included in the cookie- path
-    // is a %x2F (&#x22;/&#x22;) character.&#x22;
-    if (reqPath.substr(cookiePath.length, 1) === &#x22;/&#x22;) {
+    // is a %x2F ("/") character."
+    if (reqPath.substr(cookiePath.length, 1) === "/") {
       return true;
     }
   }
@@ -9977,12 +9970,12 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     return [domain];
   }
 
-  var prefix = domain.slice(0, -(pubSuf.length + 1)); // &#x22;.example.com&#x22;
-  var parts = prefix.split(&#x27;.&#x27;).reverse();
+  var prefix = domain.slice(0, -(pubSuf.length + 1)); // ".example.com"
+  var parts = prefix.split('.').reverse();
   var cur = pubSuf;
   var permutations = [cur];
   while (parts.length) {
-    cur = parts.shift() + &#x27;.&#x27; + cur;
+    cur = parts.shift() + '.' + cur;
     permutations.push(cur);
   }
   return permutations;
@@ -10005,22 +9998,22 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function permutePath(path) {
-  if (path === &#x27;/&#x27;) {
-    return [&#x27;/&#x27;];
+  if (path === '/') {
+    return ['/'];
   }
-  if (path.lastIndexOf(&#x27;/&#x27;) === path.length-1) {
+  if (path.lastIndexOf('/') === path.length-1) {
     path = path.substr(0,path.length-1);
   }
   var permutations = [path];
-  while (path.length &#x3e; 1) {
-    var lindex = path.lastIndexOf(&#x27;/&#x27;);
+  while (path.length &gt; 1) {
+    var lindex = path.lastIndexOf('/');
     if (lindex === 0) {
       break;
     }
     path = path.substr(0,lindex);
     permutations.push(path);
   }
-  permutations.push(&#x27;/&#x27;);
+  permutations.push('/');
   return permutations;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -10059,7 +10052,7 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
    * be used to endorse or promote products derived from this software without
    * specific prior written permission.
    *
-   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &#x22;AS IS&#x22;
+   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
    * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
    * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
    * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
@@ -10088,13 +10081,13 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
   }
 
   domain = domain.toLowerCase();
-  var parts = domain.split(&#x27;.&#x27;).reverse();
+  var parts = domain.split('.').reverse();
 
-  var suffix = &#x27;&#x27;;
+  var suffix = '';
   var suffixLen = 0;
-  for (var i=0; i&#x3c;parts.length; i++) {
+  for (var i=0; i&lt;parts.length; i++) {
     var part = parts[i];
-    var starstr = &#x27;*&#x27;+suffix;
+    var starstr = '*'+suffix;
     var partstr = part+suffix;
 
     if (index[starstr]) { // star rule matches
@@ -10106,16 +10099,16 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
       suffixLen = i+1;
     }
 
-    suffix = &#x27;.&#x27;+partstr;
+    suffix = '.'+partstr;
   }
 
-  if (index[&#x27;*&#x27;+suffix]) { // *.domain exists (e.g. *.kyoto.jp for domain=&#x27;kyoto.jp&#x27;);
+  if (index['*'+suffix]) { // *.domain exists (e.g. *.kyoto.jp for domain='kyoto.jp');
     return null;
   }
 
   suffixLen = suffixLen || 1;
-  if (parts.length &#x3e; suffixLen) {
-    var publicSuffix = parts.slice(0,suffixLen+1).reverse().join(&#x27;.&#x27;);
+  if (parts.length &gt; suffixLen) {
+    var publicSuffix = parts.slice(0,suffixLen+1).reverse().join('.');
     return converted ? punycode.toUnicode(publicSuffix) : publicSuffix;
   }
 
@@ -10123,8 +10116,8 @@ cookiejar.getCookies(&#x27;http://example.com/otherpath&#x27;,function(err,cooki
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
  */
-&#x22;use strict&#x22;;
-var pubsuffix = require(&#x27;./pubsuffix&#x27;);
+"use strict";
+var pubsuffix = require('./pubsuffix');
 
 // Gives the permutation of all possible domainMatch()es of a given domain. The
 // array is in shortest-to-longest order.  Handy for indexing.
@@ -10169,3 +10162,4 @@ if (pubSuf == domain) {
     ]
 </div>
 </div>
+</body></html>
