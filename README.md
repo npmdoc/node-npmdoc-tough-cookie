@@ -1,4 +1,7 @@
-# api documentation for  [tough-cookie (v2.3.2)](https://github.com/salesforce/tough-cookie)  [![npm package](https://img.shields.io/npm/v/npmdoc-tough-cookie.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-tough-cookie) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-tough-cookie.svg)](https://travis-ci.org/npmdoc/node-npmdoc-tough-cookie)
+# npmdoc-tough-cookie
+
+#### basic api documentation for  [tough-cookie (v2.3.2)](https://github.com/salesforce/tough-cookie)  [![npm package](https://img.shields.io/npm/v/npmdoc-tough-cookie.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-tough-cookie) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-tough-cookie.svg)](https://travis-ci.org/npmdoc/node-npmdoc-tough-cookie)
+
 #### RFC6265 Cookies and Cookie Jar for node.js
 
 [![NPM](https://nodei.co/npm/tough-cookie.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/tough-cookie)
@@ -99,7 +102,8 @@
         "suffixup": "curl -o public_suffix_list.dat https://publicsuffix.org/list/public_suffix_list.dat && ./generate-pubsuffix.js",
         "test": "vows test/*_test.js"
     },
-    "version": "2.3.2"
+    "version": "2.3.2",
+    "bin": {}
 }
 ```
 
